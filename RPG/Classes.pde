@@ -6,7 +6,6 @@ abstract class Classes{
   float x,y;
   void runAway(){
   }
-  abstract void attack(Monsters monster);
-  abstract void specialMove(Monsters monster);
-  abstract void dead();
+  abstract void attack(Monsters monster);//triggers attack animation
+  abstract void dead();//makes character lie on floor/disappear
 }

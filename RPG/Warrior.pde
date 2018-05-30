@@ -9,11 +9,12 @@ class Warrior extends Classes{
     
   }
    void attack(Monsters monster){
-     
+     //should trigger the attack animation
+     monster.hp -=atk;
    }
   
-   void specialMove(Monsters monster){
-     
+   void infernalSlash(Monsters monster){
+     monster.hp -=2 * atk;
    }
   
    void dead(){
