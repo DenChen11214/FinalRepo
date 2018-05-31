@@ -1,4 +1,4 @@
-class Ogre {
+class Ogre extends Monsters{
   float hp, atk;
   float x, y;
   boolean myTurn;

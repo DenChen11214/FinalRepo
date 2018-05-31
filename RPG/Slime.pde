@@ -1,4 +1,4 @@
-class Slime {
+class Slime extends Monsters{
   float hp, atk;
   float x, y;
   boolean myTurn;

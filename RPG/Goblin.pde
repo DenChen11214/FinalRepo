@@ -1,4 +1,4 @@
-class Goblin {
+class Goblin extends Monsters{
   float hp, atk;
   float x, y;
   boolean myTurn;
