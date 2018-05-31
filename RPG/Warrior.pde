@@ -14,7 +14,7 @@ class Warrior extends Classes {
     monster.hp -=atk;
   }
 
-  void infernalSlash(Monsters monster) {
+  void cleave(Monsters monster) {
     monster.hp -=2 * atk;
   }
 

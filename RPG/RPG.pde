@@ -4,11 +4,13 @@ float numBattles;
 void setup() {
   size(900, 600);
   p = new Player();
+  scene = new Battle();
 }
 void draw() {
   background(255);
   p.update();
   p.display();
+  scene.display();
 
 }
 void keyPressed() {
