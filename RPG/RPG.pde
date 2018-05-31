@@ -1,12 +1,32 @@
 Player p;
+Healer h;
+Mage m;
+Warrior w;
+Ogre o;
+Slime s;
+Goblin g;
+
+
 void setup() {
-  size(600, 600);
+  size(900, 600);
   p = new Player();
+  o = new Ogre(500,40,width - (width/4.0), height / 4.0);
+  s = new Slime(500,40,width - (width/4.0), height / 2.0);
+  g = new Goblin(500,40,width - (width/4.0), 3 * height / 4.0);
+  h = new Healer();
+  m = new Mage();
+  w = new Warrior();
 }
 void draw() {
   background(255);
   p.update();
   p.display();
+  h.display();
+  m.display();
+  w.display();
+  o.display();
+  s.display();
+  g.display();
 }
 void keyPressed() {
   if (keyCode == 'W' || keyCode == 'w') {
