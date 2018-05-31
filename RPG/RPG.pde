@@ -5,7 +5,7 @@ Warrior w;
 Ogre o;
 Slime s;
 Goblin g;
-
+Map cave;
 
 void setup() {
   size(900, 600);
@@ -16,9 +16,10 @@ void setup() {
   h = new Healer();
   m = new Mage();
   w = new Warrior();
+  cave = new Map("room.txt");
 }
 void draw() {
-  background(255);
+  cave.display();
   p.update();
   p.display();
   h.display();

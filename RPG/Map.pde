@@ -2,8 +2,8 @@ import java.io.*;
 import java.util.*;
 class Map {
   private char[][] base;
-  private color[][] map
-  Map(String filename)throw FileNotFoundException {
+  private float[][] map;
+  Map(String filename){
     File f = new File(filename);
     Scanner s = new Scanner(f);
     String str = "";
@@ -16,9 +16,8 @@ class Map {
       rows ++;
     }
     s.close();
-    
     base = new char[rows][cols];
-    map = new color[row][cols];
+    map = new float[rows][cols];
     int start = 0;
     int end = 0;
     int i = 0;
@@ -28,13 +27,26 @@ class Map {
         i++;
       }
     }
+    for (int  r = 0; r < base.length; r++) {
+      for (int c = 0; c < base[0].length; c++) {
+        if (base[r][c] == '#') {
+          map[r][c] = 150;
+        } else {
+          map[r][c] = 0;
+        }
+      }
+    }
   }
 
+
+
+
+
   public void display() {
-    for (int  i =0; i < base.length; i++) {
-      for (int j = 0; j < base[0].length; j++) {
-        if (base[i][j] == '#') {
-        }
+    for (int i = 0; i < map.length; i++) {
+      for (int j = 0; j< map[1].length; j++) {
+        fill(map[i][j]);
+        rect(25*i, 25*j, 25, 25);
       }
     }
   }
