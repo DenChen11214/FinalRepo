@@ -55,6 +55,7 @@ class Battle {
     h.display();
     w.display();
     m.display();
+    buttons();
   }
   void moveBar() {
     fill(80, 80, 255);
@@ -95,5 +96,12 @@ class Battle {
       fill(255);
     }
     text(h.name + "          " + (int)h.hp, 15 * width / 24, 4 * height/ 5 + 19 * height / 120);
+  }
+  void buttons(){
+    float textW = textWidth("Attack");
+    float textH = textAscent() + textDescent();
+    if((mouseX > (20 - textW / 2))&& (mouseX < (20 + textW)) && mousePressed && (mouseY > 4 * height/ 5 + 5 * height / 120 - textH / 2) && (mouseY < 4 * height/ 5 + 5 * height / 120 + textH / 2)){
+      System.out.println("HIHIIHIHIHIHIHIHI");
+    }
   }
 }
