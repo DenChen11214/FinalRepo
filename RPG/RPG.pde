@@ -1,3 +1,4 @@
+import java.util.Map;
 Player p;
 Healer h;
 Mage m;
@@ -16,7 +17,8 @@ void setup() {
   h = new Healer();
   m = new Mage();
   w = new Warrior();
-  cave = new Map("room.txt");
+  cave = new Map("Room.txt");
+ 
 }
 void draw() {
   cave.display();
