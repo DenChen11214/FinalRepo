@@ -19,7 +19,7 @@ void draw() {
     p.display();
     xNew = p.x;
     yNew = p.y;
-    if(Math.pow(xNew - xOld,2) + Math.pow(yNew - yOld,2) >= (Math.pow(height,2) + Math.pow(width,2)) / 20){
+    if(Math.pow(xNew - xOld,2) + Math.pow(yNew - yOld,2) >= (Math.pow(height,2) + Math.pow(width,2)) / 20){//2nd part of inequality is bound to change when I figure out the size of the player sprite
       stepsTaken++;
       hasStepped = true;
     }
@@ -32,6 +32,7 @@ void draw() {
     scene.display();
     scene.moveBar();
   }
+  
 }
 void keyPressed() {
   if (keyCode == 'W' || keyCode == 'w') {
