@@ -74,8 +74,26 @@ class Battle {
       text("Heal", 20, 4 * height/ 5 + 12 * height / 120);
     }
     text("Run Away", 20, 4 * height/ 5 + 19 * height / 120);
+    if (w.myTurn){
+      fill(255,255,0);
+    }
+    else{
+      fill(255);
+    }
     text(w.name + "          " + (int)w.hp, 15 * width / 24, 4 * height/ 5 + 5 * height / 120);
+    if (m.myTurn){
+      fill(255,255,0);
+    }
+    else{
+      fill(255);
+    }
     text(m.name + "          " + (int)m.hp, 15 * width / 24, 4 * height/ 5 + 12 * height / 120);
+    if (h.myTurn){
+      fill(255,255,0);
+    }
+    else{
+      fill(255);
+    }
     text(h.name + "          " + (int)h.hp, 15 * width / 24, 4 * height/ 5 + 19 * height / 120);
   }
 }
