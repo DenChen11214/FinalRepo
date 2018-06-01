@@ -18,6 +18,7 @@ class Goblin extends Monsters{
   }
   void display() {
     //testing
+
     ellipse(x,y,50,50);
   }
 }

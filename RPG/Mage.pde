@@ -4,7 +4,7 @@ class Mage extends Classes {
     hp = 200;
     cooldown = 0;
     isDead = false;
-    myTurn = true;
+    myTurn = false;
     name = "Chiaki";
     x = width / 4.0;
     y = height / 2.0;  

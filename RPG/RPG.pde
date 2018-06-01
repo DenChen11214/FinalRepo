@@ -2,7 +2,7 @@ Player p;
 Battle scene;
 float numBattles;
 void setup() {
-  size(900, 600);
+  size(900, 1000);
   p = new Player();
   scene = new Battle();
 }
@@ -11,6 +11,7 @@ void draw() {
   p.update();
   p.display();
   scene.display();
+  scene.moveBar();
 
 }
 void keyPressed() {
