@@ -99,9 +99,17 @@ class Battle {
   }
   void buttons(){
     float textW = textWidth("Attack");
+    float textWW = textWidth("Cleave");
+    float textWM = textWidth("Fireball");
+    float textWH = textWidth("Heal");
+    float textWR = textWidth("Run Away");
     float textH = textAscent() + textDescent();
     if((mouseX > (20 - textW / 2))&& (mouseX < (20 + textW)) && mousePressed && (mouseY > 4 * height/ 5 + 5 * height / 120 - textH / 2) && (mouseY < 4 * height/ 5 + 5 * height / 120 + textH / 2)){
-      System.out.println("HIHIIHIHIHIHIHIHI");
+      
+    }
+    if((mouseX > (20 - textW / 2))&& (mouseX < (20 + textW)) && mousePressed && (mouseY > 4 * height/ 5 + 5 * height / 120 - textH / 2) && (mouseY < 4 * height/ 5 + 5 * height / 120 + textH / 2)){
+    }
+    if((mouseX > (20 - textW / 2))&& (mouseX < (20 + textW)) && mousePressed && (mouseY > 4 * height/ 5 + 5 * height / 120 - textH / 2) && (mouseY < 4 * height/ 5 + 5 * height / 120 + textH / 2)){
     }
   }
 }

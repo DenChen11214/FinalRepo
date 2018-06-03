@@ -5,4 +5,5 @@ abstract class Monsters {
   abstract void attack(Classes character);//attack animation
   void dead() {//death animation/disappears
   }
+  abstract void display();
 }
