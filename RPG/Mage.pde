@@ -14,8 +14,10 @@ class Mage extends Classes {
     monster.hp -=atk;
   }
 
-  void fireball(Monsters monster) {
-    monster.hp -= 2*atk;
+  void fireball(Monsters[] monsters) {
+    for(int i = 0;i< monsters.length;i++){
+      monsters[i].hp -= atk;
+    }
   }
 
   void dead() {

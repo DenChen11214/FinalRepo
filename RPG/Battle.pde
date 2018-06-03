@@ -7,6 +7,7 @@ class Battle {
   Goblin g;
   float numMonsters;
   boolean isAttacking = false;
+  boolean runAway = false;
   Battle() {
     numMonsters = (int)(Math.random() * 3) + 1;
     h = new Healer();
@@ -106,30 +107,19 @@ class Battle {
     if (isAttacking) {
       if (w.myTurn) {
         if (chooseTarget() != null) {
-          System.out.println(g.hp);
-          System.out.println(o.hp);
-          System.out.println(s.hp);
-          if(g == chooseTarget()){
-            System.out.println("g");
-            w.attack(g);
-            System.out.println(g.hp);
-          }
-          if(s == chooseTarget()){
-            System.out.println("s");
-            w.attack(s);
-            System.out.println(s.hp);
-          }
-          if(o == chooseTarget()){
-            System.out.println("o");
-            w.attack(o);
-            System.out.println(o.hp);
-          }
+          w.attack(chooseTarget());
           isAttacking = false;
         }
       } else if (m.myTurn) {
-        m.attack(chooseTarget());
+        if (chooseTarget() != null) {
+          m.attack(chooseTarget());
+          isAttacking = false;
+        }
       } else if (h.myTurn) {
-        h.attack(chooseTarget());
+        if (chooseTarget() != null) {
+          h.attack(chooseTarget());
+          isAttacking = false;
+        }
       }
     }
     if (w.myTurn) {
@@ -145,6 +135,7 @@ class Battle {
       }
     }
     if ((mouseX > (20 - textWR / 2))&& (mouseX < (20 + textWR)) && mousePressed && (mouseY > 4 * height/ 5 + 19 * height / 120 - textH / 2) && (mouseY < 4 * height/ 5 + 19 * height / 120 + textH / 2)) {
+      runAway = true;
     }
   }
   Monsters chooseTarget() {

@@ -14,25 +14,28 @@ void setup() {
 }
 void draw() {
   background(255);
-  if(!inBattle){
+  if (!inBattle) {
     p.update();
     p.display();
     xNew = p.x;
     yNew = p.y;
-    if(Math.pow(xNew - xOld,2) + Math.pow(yNew - yOld,2) >= (Math.pow(height,2) + Math.pow(width,2)) / 20){//2nd part of inequality is bound to change when I figure out the size of the player sprite
+    if (Math.pow(xNew - xOld, 2) + Math.pow(yNew - yOld, 2) >= (Math.pow(height, 2) + Math.pow(width, 2)) / 20) {//2nd part of inequality is bound to change when I figure out the size of the player sprite
       stepsTaken++;
       hasStepped = true;
     }
   }
-  if(hasStepped && (int)Math.random() * 13 == 0) {
+  if (hasStepped && (int)Math.random() * 13 == 0) {
     inBattle = true;
     hasStepped = false;
   }
-  if(inBattle){
-    scene.display();
-    scene.moveBar();
+  if (scene.runAway && inBattle) {
+    inBattle = false;
   }
-  
+  if (inBattle) {
+    scene.moveBar();
+    scene.display();
+  }
+   //<>//
 }
 void keyPressed() {
   if (keyCode == 'W' || keyCode == 'w') {
