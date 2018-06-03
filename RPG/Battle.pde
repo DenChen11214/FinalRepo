@@ -6,6 +6,7 @@ class Battle {
   Slime s;
   Goblin g;
   float numMonsters;
+  boolean isAttacking = false;
   Battle() {
     numMonsters = (int)(Math.random() * 3) + 1;
     h = new Healer();
@@ -100,17 +101,24 @@ class Battle {
     float textWR = textWidth("Run Away");
     float textH = textAscent() + textDescent();
     if ((mouseX > (20 - textW / 2))&& (mouseX < (20 + textW)) && mousePressed && (mouseY > 4 * height/ 5 + 5 * height / 120 - textH / 2) && (mouseY < 4 * height/ 5 + 5 * height / 120 + textH / 2)) {
+      isAttacking = true;
+    }
+    if (isAttacking) {
       if (w.myTurn) {
-        System.out.println("ATK");
-      }
-      if (m.myTurn) {
-      }
-      if (h.myTurn) {
+        if (chooseTarget() != null) {
+          System.out.println(g.hp);
+          w.attack(chooseTarget());
+          System.out.println(g.hp);
+          isAttacking = false;
+        }
+      } else if (m.myTurn) {
+        m.attack(chooseTarget());
+      } else if (h.myTurn) {
+        h.attack(chooseTarget());
       }
     }
     if (w.myTurn) {
       if ((mouseX > (20 - textWW / 2))&& (mouseX < (20 + textWW)) && mousePressed && (mouseY > 4 * height/ 5 + 12 * height / 120 - textH / 2) && (mouseY < 4 * height/ 5 + 12 * height / 120 + textH / 2)) {
-      System.out.println("Cleave");
       }
     }
     if (m.myTurn) {
@@ -121,8 +129,28 @@ class Battle {
       if ((mouseX > (20 - textWH / 2))&& (mouseX < (20 + textWH)) && mousePressed && (mouseY > 4 * height/ 5 + 12 * height / 120 - textH / 2) && (mouseY < 4 * height/ 5 + 12 * height / 120 + textH / 2)) {
       }
     }
-    if ((mouseX > (20 - textW / 2))&& (mouseX < (20 + textW)) && mousePressed && (mouseY > 4 * height/ 5 + 19 * height / 120 - textH / 2) && (mouseY < 4 * height/ 5 + 19 * height / 120 + textH / 2)) {
-      System.out.println("Run");
+    if ((mouseX > (20 - textWR / 2))&& (mouseX < (20 + textWR)) && mousePressed && (mouseY > 4 * height/ 5 + 19 * height / 120 - textH / 2) && (mouseY < 4 * height/ 5 + 19 * height / 120 + textH / 2)) {
     }
+  }
+  Monsters chooseTarget() {
+    if (g != null) {
+      if (mouseX > g.x - 25 && mouseX < g.x + 25 && mouseY > g.y - 25 && mouseY < g.y + 25 && mousePressed) {
+        System.out.println("g");
+        return g;
+      }
+    }
+    if (s != null) {
+      if (mouseX > s.x - 25 && mouseX < s.x + 25 && mouseY > s.y - 25 && mouseY < s.y + 25 && mousePressed) {
+        System.out.println("s");
+        return s;
+      }
+    }
+    if (o != null) {
+      if (mouseX > o.x - 25 && mouseX < o.x + 25 && mouseY > o.y - 25 && mouseY < o.y + 25 && mousePressed) {
+        System.out.println("o");
+        return o;
+      }
+    }
+    return null;
   }
 }

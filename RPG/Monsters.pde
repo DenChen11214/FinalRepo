@@ -6,4 +6,7 @@ abstract class Monsters {
   void dead() {//death animation/disappears
   }
   abstract void display();
+  String toString(){
+    return "" + hp;
+  }
 }
