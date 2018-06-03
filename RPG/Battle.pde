@@ -107,8 +107,23 @@ class Battle {
       if (w.myTurn) {
         if (chooseTarget() != null) {
           System.out.println(g.hp);
-          w.attack(chooseTarget());
-          System.out.println(g.hp);
+          System.out.println(o.hp);
+          System.out.println(s.hp);
+          if(g == chooseTarget()){
+            System.out.println("g");
+            w.attack(g);
+            System.out.println(g.hp);
+          }
+          if(s == chooseTarget()){
+            System.out.println("s");
+            w.attack(s);
+            System.out.println(s.hp);
+          }
+          if(o == chooseTarget()){
+            System.out.println("o");
+            w.attack(o);
+            System.out.println(o.hp);
+          }
           isAttacking = false;
         }
       } else if (m.myTurn) {
@@ -135,19 +150,16 @@ class Battle {
   Monsters chooseTarget() {
     if (g != null) {
       if (mouseX > g.x - 25 && mouseX < g.x + 25 && mouseY > g.y - 25 && mouseY < g.y + 25 && mousePressed) {
-        System.out.println("g");
         return g;
       }
     }
     if (s != null) {
       if (mouseX > s.x - 25 && mouseX < s.x + 25 && mouseY > s.y - 25 && mouseY < s.y + 25 && mousePressed) {
-        System.out.println("s");
         return s;
       }
     }
     if (o != null) {
       if (mouseX > o.x - 25 && mouseX < o.x + 25 && mouseY > o.y - 25 && mouseY < o.y + 25 && mousePressed) {
-        System.out.println("o");
         return o;
       }
     }
