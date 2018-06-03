@@ -67,49 +67,62 @@ class Battle {
     text("Attack", 20, 4 * height/ 5 + 5 * height / 120);
     if (w.myTurn) {
       text("Cleave", 20, 4 * height/ 5 + 12 * height / 120);
-    }
-    else if (m.myTurn) {
+    } else if (m.myTurn) {
       text("Fireball", 20, 4 * height/ 5 + 12 * height / 120);
-    }
-    else if (h.myTurn) {
+    } else if (h.myTurn) {
       text("Heal", 20, 4 * height/ 5 + 12 * height / 120);
     }
     text("Run Away", 20, 4 * height/ 5 + 19 * height / 120);
-    if (w.myTurn){
-      fill(255,255,0);
-    }
-    else{
+    if (w.myTurn) {
+      fill(255, 255, 0);
+    } else {
       fill(255);
     }
     text(w.name + "          " + (int)w.hp, 15 * width / 24, 4 * height/ 5 + 5 * height / 120);
-    if (m.myTurn){
-      fill(255,255,0);
-    }
-    else{
+    if (m.myTurn) {
+      fill(255, 255, 0);
+    } else {
       fill(255);
     }
     text(m.name + "          " + (int)m.hp, 15 * width / 24, 4 * height/ 5 + 12 * height / 120);
-    if (h.myTurn){
-      fill(255,255,0);
-    }
-    else{
+    if (h.myTurn) {
+      fill(255, 255, 0);
+    } else {
       fill(255);
     }
     text(h.name + "          " + (int)h.hp, 15 * width / 24, 4 * height/ 5 + 19 * height / 120);
   }
-  void buttons(){
+  void buttons() {
     float textW = textWidth("Attack");
     float textWW = textWidth("Cleave");
     float textWM = textWidth("Fireball");
     float textWH = textWidth("Heal");
     float textWR = textWidth("Run Away");
     float textH = textAscent() + textDescent();
-    if((mouseX > (20 - textW / 2))&& (mouseX < (20 + textW)) && mousePressed && (mouseY > 4 * height/ 5 + 5 * height / 120 - textH / 2) && (mouseY < 4 * height/ 5 + 5 * height / 120 + textH / 2)){
-      
+    if ((mouseX > (20 - textW / 2))&& (mouseX < (20 + textW)) && mousePressed && (mouseY > 4 * height/ 5 + 5 * height / 120 - textH / 2) && (mouseY < 4 * height/ 5 + 5 * height / 120 + textH / 2)) {
+      if (w.myTurn) {
+        System.out.println("ATK");
+      }
+      if (m.myTurn) {
+      }
+      if (h.myTurn) {
+      }
     }
-    if((mouseX > (20 - textW / 2))&& (mouseX < (20 + textW)) && mousePressed && (mouseY > 4 * height/ 5 + 5 * height / 120 - textH / 2) && (mouseY < 4 * height/ 5 + 5 * height / 120 + textH / 2)){
+    if (w.myTurn) {
+      if ((mouseX > (20 - textWW / 2))&& (mouseX < (20 + textWW)) && mousePressed && (mouseY > 4 * height/ 5 + 12 * height / 120 - textH / 2) && (mouseY < 4 * height/ 5 + 12 * height / 120 + textH / 2)) {
+      System.out.println("Cleave");
+      }
     }
-    if((mouseX > (20 - textW / 2))&& (mouseX < (20 + textW)) && mousePressed && (mouseY > 4 * height/ 5 + 5 * height / 120 - textH / 2) && (mouseY < 4 * height/ 5 + 5 * height / 120 + textH / 2)){
+    if (m.myTurn) {
+      if ((mouseX > (20 - textWM / 2))&& (mouseX < (20 + textWM)) && mousePressed && (mouseY > 4 * height/ 5 + 12 * height / 120 - textH / 2) && (mouseY < 4 * height/ 5 + 12 * height / 120 + textH / 2)) {
+      }
+    }
+    if (h.myTurn) {
+      if ((mouseX > (20 - textWH / 2))&& (mouseX < (20 + textWH)) && mousePressed && (mouseY > 4 * height/ 5 + 12 * height / 120 - textH / 2) && (mouseY < 4 * height/ 5 + 12 * height / 120 + textH / 2)) {
+      }
+    }
+    if ((mouseX > (20 - textW / 2))&& (mouseX < (20 + textW)) && mousePressed && (mouseY > 4 * height/ 5 + 19 * height / 120 - textH / 2) && (mouseY < 4 * height/ 5 + 19 * height / 120 + textH / 2)) {
+      System.out.println("Run");
     }
   }
 }
