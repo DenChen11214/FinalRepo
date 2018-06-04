@@ -4,7 +4,7 @@ class Mage extends Classes {
     hp = 200;
     cooldown = 0;
     isDead = false;
-    myTurn = true;
+    myTurn = false;
     name = "Chiaki";
     x = width / 4.0;
     y = height / 2.0;  
@@ -14,8 +14,10 @@ class Mage extends Classes {
     monster.hp -=atk;
   }
 
-  void fireball(Monsters monster) {
-    monster.hp -= 2*atk;
+  void fireball(Monsters[] monsters) {
+    for(int i = 0;i< monsters.length;i++){
+      monsters[i].hp -= atk;
+    }
   }
 
   void dead() {
@@ -25,6 +27,7 @@ class Mage extends Classes {
   }
   void display() {
     //testing
+    fill(255);
     ellipse(x,y,50,50);
   }
 }

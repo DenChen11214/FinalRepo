@@ -1,7 +1,4 @@
-class Goblin {
-  float hp, atk;
-  float x, y;
-  boolean myTurn;
+class Goblin extends Monsters{
   Goblin(float health, float attack, float x_, float y_) {
     hp = health;
     atk = attack;
@@ -18,6 +15,9 @@ class Goblin {
   }
   void display() {
     //testing
+    fill(255);
     ellipse(x,y,50,50);
-  }
+    fill(0);
+    text("" + hp,x,y);  
+  }  
 }

@@ -11,10 +11,9 @@ class Warrior extends Classes {
   }
   void attack(Monsters monster) {
     //should trigger the attack animation
-    monster.hp -=atk;
+      monster.hp -= atk;
   }
-
-  void infernalSlash(Monsters monster) {
+  void cleave(Monsters monster) {
     monster.hp -=2 * atk;
   }
 
@@ -25,6 +24,7 @@ class Warrior extends Classes {
   }
   void display() {
     //testing
+    fill(255);
     ellipse(x,y,50,50);
   }
 }

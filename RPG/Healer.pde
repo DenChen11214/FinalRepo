@@ -4,7 +4,7 @@ class Healer extends Classes {
     hp = 250;
     cooldown = 0;
     isDead = false;
-    myTurn = true;
+    myTurn = false;
     name = "Cyril";
     x = width / 4;;
     y = 3 * height / 4.0;
@@ -25,6 +25,7 @@ class Healer extends Classes {
   }
   void display() {
     //testing
+    fill(255);
     ellipse(x,y,50,50);
   }
 }

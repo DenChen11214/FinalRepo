@@ -1,7 +1,4 @@
-class Ogre {
-  float hp, atk;
-  float x, y;
-  boolean myTurn;
+class Ogre extends Monsters{
   Ogre(float health, float attack, float x_, float y_) {
     hp = health;
     atk = attack;
@@ -18,6 +15,9 @@ class Ogre {
   }
   void display() {
     //testing
+    fill(255);
     ellipse(x,y,50,50);
+    fill(0);
+    text("" + hp,x,y);
   }
 }
