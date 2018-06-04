@@ -8,7 +8,7 @@ float xOld, xNew, yOld, yNew;
 float stepsTaken;
 boolean hasStepped;
 void setup() {
-  size(900, 600);
+  size(800, 600);
   p = new Player();
   scene = new Battle();
   xOld = p.x;

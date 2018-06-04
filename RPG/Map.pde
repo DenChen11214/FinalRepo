@@ -40,7 +40,7 @@ class Map {
         } else {
           fill(0);
         }
-        rect(25*i, 25*j, 25, 25);
+        rect(75*i, 75*j, 75, 75);
       }
     }
     textSize(20);
