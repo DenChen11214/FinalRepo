@@ -59,7 +59,7 @@ class Battle {
     m.display();
     buttons();
   }
-  void moveBar() {
+  void moveBar() { 
     fill(80, 80, 255);
     rectMode(CORNERS);
     rect(0, height, 7 * width / 12, 4 * height / 5);
@@ -94,7 +94,7 @@ class Battle {
     }
     text(h.name + "          " + (int)h.hp, 15 * width / 24, 4 * height/ 5 + 19 * height / 120);
   }
-  void buttons() {
+  void buttons() { //makes it so that if attack is clicked, you can select a target and that target will lost hp, run away and the special moves don't work for now
     float textW = textWidth("Attack");
     float textWW = textWidth("Cleave");
     float textWM = textWidth("Fireball");
