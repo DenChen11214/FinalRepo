@@ -17,7 +17,7 @@ void setup() {
   h = new Healer();
   m = new Mage();
   w = new Warrior();
-  cave = new Map("Room.txt");
+  cave = new Map();
  
 }
 void draw() {
