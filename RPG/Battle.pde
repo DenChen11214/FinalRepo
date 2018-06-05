@@ -7,7 +7,6 @@ class Battle {
   Goblin g;
   float numMonsters;
   boolean isAttacking = false;
-  boolean runAway = false;
   Battle() {
     numMonsters = (int)(Math.random() * 3) + 1;
     h = new Healer();
@@ -135,7 +134,7 @@ class Battle {
       }
     }
     if ((mouseX > (20 - textWR / 2))&& (mouseX < (20 + textWR)) && mousePressed && (mouseY > 4 * height/ 5 + 19 * height / 120 - textH / 2) && (mouseY < 4 * height/ 5 + 19 * height / 120 + textH / 2)) {
-      runAway = true;
+      inBattle = false;
     }
   }
   Monsters chooseTarget() {
