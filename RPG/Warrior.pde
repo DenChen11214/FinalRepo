@@ -15,6 +15,7 @@ class Warrior extends Classes {
   }
   void cleave(Monsters monster) {
     monster.hp -=2 * atk;
+    cooldown = 4;
   }
 
   void dead() {
@@ -26,5 +27,7 @@ class Warrior extends Classes {
     //testing
     fill(255);
     ellipse(x,y,50,50);
+    fill(0);
+    text("" + hp,x,y);  
   }
 }

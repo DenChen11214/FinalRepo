@@ -7,6 +7,7 @@ class Battle {
   Goblin g;
   float numMonsters;
   boolean isAttacking = false;
+  boolean isSpecial;
   Battle() {
     numMonsters = (int)(Math.random() * 3) + 1;
     h = new Healer();
@@ -121,16 +122,31 @@ class Battle {
         }
       }
     }
-    if (w.myTurn) {
-      if ((mouseX > (20 - textWW / 2))&& (mouseX < (20 + textWW)) && mousePressed && (mouseY > 4 * height/ 5 + 12 * height / 120 - textH / 2) && (mouseY < 4 * height/ 5 + 12 * height / 120 + textH / 2)) {
-      }
+    if ((mouseX > (20 - textWM / 2))&& (mouseX < (20 + textWM)) && mousePressed && (mouseY > 4 * height/ 5 + 12 * height / 120 - textH / 2) && (mouseY < 4 * height/ 5 + 12 * height / 120 + textH / 2)) {
+      isSpecial = true;
     }
-    if (m.myTurn) {
-      if ((mouseX > (20 - textWM / 2))&& (mouseX < (20 + textWM)) && mousePressed && (mouseY > 4 * height/ 5 + 12 * height / 120 - textH / 2) && (mouseY < 4 * height/ 5 + 12 * height / 120 + textH / 2)) {
+    if (isSpecial) {
+      if (w.myTurn) {
+        if (w.cooldown == 0) {
+          if (chooseTarget() != null) {
+            w.cleave(chooseTarget());
+            isSpecial = false;
+          }
+        }
       }
-    }
-    if (h.myTurn) {
-      if ((mouseX > (20 - textWH / 2))&& (mouseX < (20 + textWH)) && mousePressed && (mouseY > 4 * height/ 5 + 12 * height / 120 - textH / 2) && (mouseY < 4 * height/ 5 + 12 * height / 120 + textH / 2)) {
+      if (m.myTurn) {
+        if (m.cooldown == 0) {
+          m.fireball(AOE());
+          isSpecial = false;
+        }
+      }
+      if (h.myTurn) {
+        if (h.cooldown == 0) {
+          if (healTarget() != null) {
+            h.heal(healTarget());
+            isSpecial = false;
+          }
+        }
       }
     }
     if ((mouseX > (20 - textWR / 2))&& (mouseX < (20 + textWR)) && mousePressed && (mouseY > 4 * height/ 5 + 19 * height / 120 - textH / 2) && (mouseY < 4 * height/ 5 + 19 * height / 120 + textH / 2)) {
@@ -152,6 +168,31 @@ class Battle {
       if (mouseX > o.x - 25 && mouseX < o.x + 25 && mouseY > o.y - 25 && mouseY < o.y + 25 && mousePressed) {
         return o;
       }
+    }
+    return null;
+  }
+  Monsters[] AOE() {
+    Monsters[] mobs = new Monsters[3];
+    if (g != null) {
+      mobs[0] = g;
+    }
+    if (o != null) {
+      mobs[1] = o;
+    }
+    if (s != null) {
+      mobs[2] = s;
+    }
+    return mobs;
+  }
+  Classes healTarget() {
+    if (mouseX > h.x - 25 && mouseX < h.x + 25 && mouseY > h.y - 25 && mouseY < h.y + 25 && mousePressed) {
+      return h;
+    }
+    if (mouseX > m.x - 25 && mouseX < m.x + 25 && mouseY > m.y - 25 && mouseY < m.y + 25 && mousePressed) {
+      return m;
+    }
+    if (mouseX > w.x - 25 && mouseX < w.x + 25 && mouseY > w.y - 25 && mouseY < w.y + 25 && mousePressed) {
+      return w;
     }
     return null;
   }

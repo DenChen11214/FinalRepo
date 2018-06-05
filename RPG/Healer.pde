@@ -15,7 +15,8 @@ class Healer extends Classes {
   }
 
   void heal(Classes character) {
-    character.hp += 150;
+      character.hp += 150;
+      cooldown = 4;
   }
 
   void dead() {
@@ -27,5 +28,7 @@ class Healer extends Classes {
     //testing
     fill(255);
     ellipse(x,y,50,50);
+    fill(0);
+    text("" + hp,x,y);  
   }
 }

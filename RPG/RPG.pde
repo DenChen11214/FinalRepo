@@ -34,8 +34,7 @@ void draw() {
     inBattle = true;
     hasStepped = false;
   }
-   //<>//
-}
+} //<>//
 void keyPressed() {
   if (keyCode == 'W' || keyCode == 'w') {
     p.keysPressed[0] = true;
