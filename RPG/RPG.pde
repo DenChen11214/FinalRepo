@@ -1,5 +1,6 @@
-import java.util.Map; //<>//
+import java.util.Map; //<>// //<>//
 Player p;
+
 Healer h;
 Mage m;
 Warrior w;
@@ -14,12 +15,14 @@ float xOld, xNew, yOld, yNew;
 float stepsTaken;
 boolean hasStepped;
 void setup() {
-  size(900, 600);
+  size(800, 600);
   p = new Player();
   scene = new Battle();
   xOld = p.x;
   yOld = p.y;
+  cave = new Map();
 }
+
 void draw() {
   background(255);
   cave.display();
@@ -42,19 +45,26 @@ void draw() {
     inBattle = true;
     hasStepped = false;
   }
+  /* if (scene.runAway() && inBattle) {
+   inBattle = false;
+   }
+   */
+  if (inBattle) {
+    scene.moveBar();
+    scene.display();
+  }
 }
-
-void keyReleased() {
+void keyPressed() {
   if (keyCode == 'W' || keyCode == 'w') {
-    p.keysPressed[0] = false;
+    p.keysPressed[0] = true;
   }
   if (keyCode == 'S' || keyCode == 's') {
-    p.keysPressed[1] = false;
+    p.keysPressed[1] = true;
   }
   if (keyCode == 'A' || keyCode == 'a') {
-    p.keysPressed[2] = false;
+    p.keysPressed[2] = true;
   }
   if (keyCode == 'D' || keyCode == 'd') {
-    p.keysPressed[3] = false;
+    p.keysPressed[3] = true;
   }
 }

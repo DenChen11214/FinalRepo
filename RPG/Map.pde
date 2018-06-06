@@ -2,56 +2,48 @@ import java.io.*;
 import java.util.*;
 class Map {
   char[][] base;
-  float[][] map;
   int rows;
   int cols;
-  String str;
 
-  Map(String filename) {
-    try {
-      File f = new File(filename);
-      Scanner s = new Scanner(f);
-      while ( s.hasNextLine()) {
-        String m = s.nextLine();
-        cols = m.length();
-        str += m ;
-        rows ++;
-      }
-      s.close();
-    }
-    catch(FileNotFoundException e) {
-    }
-    base = new char[rows][cols];
-    map = new float[rows][cols];
-    int i = 0;
-    for (int r = 0; r < rows; r++) {
-      for (int c = 0; c <cols; c++) {
-        base[r][c] = str.charAt(i);
+  Map() {
+    String[] lines = loadStrings("Room.txt");  
+    int row = lines.length;
+    int col = lines[0].length();
+    int  i = 0;
+    base = new char[row][col];
+    for (int r = 0; r < row; r++) {
+      for (int c = 0; c < col; c++) {
+
+        base[r][c] = lines[r].charAt(i);
         i++;
       }
-    }
-    for (int  r = 0; r < base.length; r++) {
-      for (int c = 0; c < base[0].length; c++) {
-        if (base[r][c] == '#') {
-          map[r][c] = 50;
-        } else {
-          map[r][c] = 0;
-        }
-      }
+      i = 0;
     }
   }
 
-
-
-
+  String toString() {
+    String res = "";
+    for (int i = 0; i< base.length; i++) {
+      for (int j = 0; j<base[1].length; j++) {
+        res += base[i][j] + " ";
+      }
+    }
+    return res;
+  }
 
 
   void display() {
-    for (int i = 0; i < map.length; i++) {
-      for (int j = 0; j< map[1].length; j++) {
-        fill(0);
-        rect(25*i, 25*j, 25, 25);
+    for (int i = 0; i < base.length; i++) {
+      for (int j = 0; j< base[1].length; j++) {
+        if (base[i][j] == '#') {
+          fill(255);
+        } else {
+          fill(0);
+        }
+        rect(75*i, 75*j, 75, 75);
       }
     }
+    textSize(20);
+    text(base.toString(), 10, 10);
   }
 }
