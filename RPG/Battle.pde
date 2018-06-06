@@ -44,6 +44,7 @@ class Battle {
     }
   }
   void display() {
+    background(255);
     if (numMonsters ==1 ) {
       g.display();
     } else if (numMonsters ==2 ) {
@@ -57,6 +58,7 @@ class Battle {
     h.display();
     w.display();
     m.display();
+    moveBar();
     buttons();
   }
   void moveBar() { 
