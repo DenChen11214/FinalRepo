@@ -1,7 +1,7 @@
 class Map {
   char[][] base;
-  float px;
-  float py;
+  int px;
+  int py;
 
 
   Map() {
@@ -50,9 +50,18 @@ class Map {
     rect(50*px, 50*py, 50, 50);
   }
 
-  void update(float x, float y) {
-    px += x;
-    py += y;
-    System.out.println(px + " " +py);
+  void update(int x, int y){
+    if(isValid(x,y)){
+      px += x;
+      py += y;
+    }
+  }
+
+  boolean isValid(int x, int y) {
+    if (base[px+x][py+y] == '#') {
+      return false;
+    } else {
+      return true;
+    }
   }
 }
