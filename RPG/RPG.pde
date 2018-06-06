@@ -19,6 +19,8 @@ void setup() {
 void draw() {
   background(255);
   cave.display();
+  pushMatrix();
+  translate(width/2, height/2);
   if (!inBattle) {
     xNew = cave.px;
     yNew = cave.py;
@@ -38,6 +40,7 @@ void draw() {
     scene.moveBar();
     scene.display();
   }
+  popMatrix();
 }
 
 void keyPressed() {
