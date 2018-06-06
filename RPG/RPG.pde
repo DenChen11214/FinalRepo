@@ -1,12 +1,4 @@
-import java.util.Map; //<>// //<>//
-Player p;
-
-Healer h;
-Mage m;
-Warrior w;
-Ogre o;
-Slime s;
-Goblin g;
+ //<>//
 Map cave;
 Battle scene;
 float numBattles;
@@ -16,21 +8,19 @@ float stepsTaken;
 boolean hasStepped;
 void setup() {
   size(800, 600);
-  p = new Player();
-  scene = new Battle();
-  xOld = p.x;
-  yOld = p.y;
   cave = new Map();
+
+  scene = new Battle();
+  xOld = cave.px;
+  yOld = cave.py;
 }
 
 void draw() {
   background(255);
   cave.display();
   if (!inBattle) {
-    p.update();
-    p.display();
-    xNew = p.x;
-    yNew = p.y;
+    xNew = cave.px;
+    yNew = cave.py;
     if (Math.pow(xNew - xOld, 2) + Math.pow(yNew - yOld, 2) >= (Math.pow(height, 2) + Math.pow(width, 2)) / 20) {//2nd part of inequality is bound to change when I figure out the size of the player sprite
       stepsTaken++;
       hasStepped = true;
@@ -54,17 +44,18 @@ void draw() {
     scene.display();
   }
 }
+
 void keyPressed() {
   if (keyCode == 'W' || keyCode == 'w') {
-    p.keysPressed[0] = true;
+    cave.update(0, -1);
   }
   if (keyCode == 'S' || keyCode == 's') {
-    p.keysPressed[1] = true;
+    cave.update(0, 1);
   }
   if (keyCode == 'A' || keyCode == 'a') {
-    p.keysPressed[2] = true;
+    cave.update(-1, 0);
   }
   if (keyCode == 'D' || keyCode == 'd') {
-    p.keysPressed[3] = true;
+    cave.update(1, 0);
   }
 }
