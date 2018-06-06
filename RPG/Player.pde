@@ -1,4 +1,4 @@
-class Player {
+/*class Player {
   float x, y;
   float xspeed, yspeed;
   boolean[] keysPressed = new boolean[4];
@@ -16,9 +16,7 @@ class Player {
   }
   void update() {
     if (p.keysPressed[0]) {
-      pushMatrix();
-      translate(0,-5);
-      popMatrix();
+    
     }
     if (p.keysPressed[1]) {
       p.y+= p.yspeed;
@@ -30,4 +28,4 @@ class Player {
       p.x+= p.xspeed;
     }
   }
-}
+}*/
