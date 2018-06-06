@@ -51,10 +51,11 @@ class Map {
         rect(50* i, 50*j, 50, 50);
       }
     }
+    
     fill(255);
     ellipse(50*x, 50*y, 50, 50);
   }
-
+/*
   void update() {
     if (cave.keysPressed[0]) {
       y -= 1;
@@ -68,5 +69,7 @@ class Map {
     if (cave.keysPressed[3]) {
       x += 1;
     }
+    
   }
+  */
 }

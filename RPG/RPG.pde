@@ -1,4 +1,4 @@
-import java.io.*; //<>//
+import java.io.*; //<>// //<>//
 import java.util.*;
 Map cave;
 Battle scene;
@@ -10,9 +10,11 @@ boolean hasStepped;
 void setup() {
   size(800, 600);
   cave = new Map();
+  /*
   scene = new Battle();
   xOld = cave.x;
   yOld = cave.y;
+  */
 }
 
 void draw() {
