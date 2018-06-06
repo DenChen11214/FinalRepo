@@ -1,10 +1,8 @@
-import java.io.*;
-import java.util.*;
 class Map {
   char[][] base;
-  float x;
-  float y;
-  boolean[] keysPressed = new boolean[4];
+  float px;
+  float py;
+
 
   Map() {
     String[] lines = loadStrings("Room.txt");  
@@ -16,15 +14,12 @@ class Map {
       for (int c = 0; c < col; c++) {
         base[r][c] = lines[r].charAt(i);
         if (base[r][c] == 'X') {
-          x = r;
-          y = c;
+          px = r;
+          py = c;
         }
         i++;
       }
       i = 0;
-    }
-    for (int j = 0; j < 4; i++) {
-      keysPressed[j] = false;
     }
   }
 
@@ -40,7 +35,7 @@ class Map {
 
 
   void display() {
-    rectMode(CENTER);
+    //rectMode(CENTER);
     for (int i = 0; i < base.length; i++) {
       for (int j = 0; j< base[1].length; j++) {
         if (base[i][j] == '#') {
@@ -51,25 +46,13 @@ class Map {
         rect(50* i, 50*j, 50, 50);
       }
     }
-    
     fill(255);
-    ellipse(50*x, 50*y, 50, 50);
+    rect(50*px, 50*py, 50, 50);
   }
-/*
-  void update() {
-    if (cave.keysPressed[0]) {
-      y -= 1;
-    }
-    if (cave.keysPressed[1]) {
-      y += 1;
-    }
-    if (cave.keysPressed[2]) {
-      x -= 1;
-    }
-    if (cave.keysPressed[3]) {
-      x += 1;
-    }
-    
+
+  void update(float x, float y) {
+    px += x;
+    py += y;
+    System.out.println(px + " " +py);
   }
-  */
 }
