@@ -68,19 +68,28 @@ class Battle {
 
   void display() {
     background(255);
+    if((g == null || g.hp <= 0) && (o == null || o.hp <= 0) && (s == null || s.hp <= 0)){
+      inBattle = false;
+    }
     if (numMonsters ==1 ) {
       if (!g.dead()) {        
         g.display();
       }
     } else if (numMonsters ==2 ) {
-      if (!o.dead() && !s.dead()) {    
+      if (!o.dead()) {    
         o.display();
+      }
+      if (!s.dead()) {
         s.display();
       }
     } else {
-      if (!g.dead() && !s.dead() && !o.dead()) {    
+      if (!o.dead()) {    
         o.display();
+      }
+      if (!s.dead()) {
         s.display();
+      }
+      if (!g.dead()) {
         g.display();
       }
     }
