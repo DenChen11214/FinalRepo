@@ -1,5 +1,5 @@
 class MiniBoss extends Monsters{
-  Ogre(float health, float attack, float x_, float y_) {
+  MiniBoss(float health, float attack, float x_, float y_) {
     hp = health;
     atk = attack;
     x = x_;
@@ -7,6 +7,13 @@ class MiniBoss extends Monsters{
   }
   void attack(Classes character) {
     character.hp -=atk;
+  }
+  void hitAll(Classes[] players){
+    for(int i =0;i< players.length;i++){
+      if(players[i] != null){
+        players[i].hp -= atk;
+      }
+    }
   }
   void dead() {
     if (hp == 0) {
