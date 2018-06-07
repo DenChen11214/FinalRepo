@@ -25,6 +25,7 @@ class Battle {
       s = new Slime(500, 60, width - width/4, height/2);
       o = new Ogre(600, 50, width - width/4, 3 * height/4);
     }
+    w.setTurn(true);
   }
   Battle(float monsters) {
     numMonsters = monsters;
@@ -68,7 +69,7 @@ class Battle {
 
   void display() {
     background(255);
-    if((g == null || g.hp <= 0) && (o == null || o.hp <= 0) && (s == null || s.hp <= 0)){
+    if ((g == null || g.hp <= 0) && (o == null || o.hp <= 0) && (s == null || s.hp <= 0)) {
       inBattle = false;
     }
     if (numMonsters ==1 ) {
