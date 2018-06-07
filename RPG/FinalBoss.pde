@@ -5,7 +5,7 @@ class FinalBoss extends Monsters{
     x = x_;
     y = y_;
   }
-  void attack(Classes character) {
+  void attack(Classes character) {// do the same thing you did in Miniboss here
     character.hp -= 2 * atk;
   }
   void hitAll(Classes[] players){
@@ -15,10 +15,11 @@ class FinalBoss extends Monsters{
       }
     }
   }
-  void dead() {
-    if (hp == 0) {
-      //disappear
+  boolean dead() {
+    if (hp <= 0) {
+      return true;
     }
+    return false;
   }
   void display() {
     //testing

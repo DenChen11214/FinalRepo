@@ -20,8 +20,8 @@ class Healer extends Classes {
   }
 
   void dead() {
-    if (hp == 0) {
-      isDead = true;
+    if(hp <= 0){
+      isDead =true;
     }
   }
   void display() {

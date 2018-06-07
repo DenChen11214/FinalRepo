@@ -5,7 +5,7 @@ class MiniBoss extends Monsters{
     x = x_;
     y = y_;
   }
-  void attack(Classes character) {
+  void attack(Classes character) {//in battle, make it so that theres a half chance that it does hitAll and half chance it hits a random mob
     character.hp -=atk;
   }
   void hitAll(Classes[] players){
@@ -15,10 +15,11 @@ class MiniBoss extends Monsters{
       }
     }
   }
-  void dead() {
-    if (hp == 0) {
-      //disappear
+  boolean dead() {
+    if (hp <= 0) {
+      return true;
     }
+    return false;
   }
   void display() {
     //testing

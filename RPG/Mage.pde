@@ -24,7 +24,7 @@ class Mage extends Classes {
   }
 
   void dead() {
-    if (hp == 0) {
+    if (hp <= 0) {
       isDead = true;
     }
   }

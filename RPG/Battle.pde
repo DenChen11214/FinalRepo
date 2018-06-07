@@ -45,35 +45,44 @@ class Battle {
       o = new Ogre(600, 50, width - width/4, 3 * height/4);
     }
   }
-  Battle(MiniBoss mini) {
-    mBoss = new MiniBoss(1000, 120, width - width/4, height/2);
-    h = new Healer();
-    m = new Mage();
-    w = new Warrior();
-    h.display();
-    m.display();
-    w.display();
+  Battle(int mode) {
+    if (mode == 0) {
+      mBoss = new MiniBoss(1000, 120, width - width/4, height/2);
+      h = new Healer();
+      m = new Mage();
+      w = new Warrior();
+      h.display();
+      m.display();
+      w.display();
+    }
+    if (mode == 1) {
+      fBoss = new FinalBoss(1500, 160, width - width/4, height/2);
+      h = new Healer();
+      m = new Mage();
+      w = new Warrior();
+      h.display();
+      m.display();
+      w.display();
+    }
   }
-  Battle(FinalBoss boss) {
-    fBoss = new FinalBoss(1500, 160, width - width/4, height/2);
-    h = new Healer();
-    m = new Mage();
-    w = new Warrior();
-    h.display();
-    m.display();
-    w.display();
-  }
+
   void display() {
     background(255);
     if (numMonsters ==1 ) {
-      g.display();
+      if (!g.dead()) {        
+        g.display();
+      }
     } else if (numMonsters ==2 ) {
-      o.display();
-      s.display();
+      if (!o.dead() && !s.dead()) {    
+        o.display();
+        s.display();
+      }
     } else {
-      o.display();
-      s.display();
-      g.display();
+      if (!g.dead() && !s.dead() && !o.dead()) {    
+        o.display();
+        s.display();
+        g.display();
+      }
     }
     h.display();
     w.display();
