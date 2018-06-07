@@ -5,6 +5,8 @@ class Battle {
   Ogre o;
   Slime s;
   Goblin g;
+  FinalBoss fBoss;
+  MiniBoss mBoss;
   float numMonsters;
   boolean isAttacking = false;
   boolean isSpecial;
@@ -42,6 +44,24 @@ class Battle {
       s = new Slime(500, 60, width - width/4, height/2);
       o = new Ogre(600, 50, width - width/4, 3 * height/4);
     }
+  }
+  Battle(MiniBoss mini) {
+    mBoss = new MiniBoss(1000, 120, width - width/4, height/2);
+    h = new Healer();
+    m = new Mage();
+    w = new Warrior();
+    h.display();
+    m.display();
+    w.display();
+  }
+  Battle(FinalBoss boss) {
+    fBoss = new FinalBoss(1500, 160, width - width/4, height/2);
+    h = new Healer();
+    m = new Mage();
+    w = new Warrior();
+    h.display();
+    m.display();
+    w.display();
   }
   void display() {
     background(255);
@@ -98,9 +118,7 @@ class Battle {
   }
   void buttons() { //makes it so that if attack is clicked, you can select a target and that target will lost hp, run away and the special moves don't work for now
     float textW = textWidth("Attack");
-    float textWW = textWidth("Cleave");
     float textWM = textWidth("Fireball");
-    float textWH = textWidth("Heal");
     float textWR = textWidth("Run Away");
     float textH = textAscent() + textDescent();
     if ((mouseX > (20 - textW / 2))&& (mouseX < (20 + textW)) && mousePressed && (mouseY > 4 * height/ 5 + 5 * height / 120 - textH / 2) && (mouseY < 4 * height/ 5 + 5 * height / 120 + textH / 2)) {
