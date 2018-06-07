@@ -7,6 +7,7 @@ class Battle {
   Goblin g;
   FinalBoss fBoss;
   MiniBoss mBoss;
+  Classes[] heroes; 
   float numMonsters;
   boolean isAttacking = false;
   boolean isSpecial;
@@ -15,6 +16,10 @@ class Battle {
     h = new Healer();
     m = new Mage();
     w = new Warrior();
+    heroes= new Classes[3];
+    heroes[0] = w;
+    heroes[1] = h;
+    heroes[2] = m;
     if (numMonsters ==1 ) {
       g = new Goblin(400, 70, width - width/4, height/2);
     } else if (numMonsters ==2 ) {
@@ -144,37 +149,37 @@ class Battle {
       isAttacking = true;
     }
     if (isAttacking) {
-      if (w.myTurn) {
+      w.dead();
+      h.dead();
+      m.dead();
+      if (w.myTurn && !w.isDead) {
         if (chooseTarget() != null) {
           w.attack(chooseTarget());
           isAttacking = false;
           w.setTurn(false);
           m.setTurn(true);
         }
-      } else if (m.myTurn) {
+      } else if (m.myTurn && !m.isDead) {
         if (chooseTarget() != null) {
           m.attack(chooseTarget());
           isAttacking = false;
           m.setTurn(false);
           h.setTurn(true);
         }
-      } else if (h.myTurn) {
+      } else if (h.myTurn && !h.isDead) {
         if (chooseTarget() != null) {
           h.attack(chooseTarget());
           isAttacking = false;
           h.setTurn(false);
           for (Monsters a : AOE()) {
-            int target = (int)(Math.random() * 3) + 1;
+            int target = (int)(Math.random() * 3);
             if (a != null) {
-              if(target == 1 && !w.isDead){
-                a.attack(w);
+              for (int i = 0; i< 3; i++) { 
+                if (a.atk > heroes[i].hp && !heroes[i].isDead) {
+                  target = i;
+                }
               }
-              if(target == 2 && !m.isDead){
-                a.attack(m);
-              }
-              if(target == 3 && !h.isDead){
-                a.attack(h);
-              }
+              a.attack(heroes[target]);
             }
           }  
           w.setTurn(true);
