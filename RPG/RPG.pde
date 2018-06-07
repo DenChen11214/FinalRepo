@@ -1,4 +1,4 @@
- //<>// //<>//
+ //<>// //<>// //<>//
 Map cave;
 Battle scene;
 float numBattles;
@@ -7,7 +7,7 @@ float xOld, xNew, yOld, yNew, dis;
 float stepsTaken;
 boolean hasStepped;
 void setup() {
-  size(800, 600);
+  size(720, 720);
   cave = new Map();
   scene = new Battle();
   xOld = cave.px;
