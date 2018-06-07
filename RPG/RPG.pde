@@ -1,4 +1,4 @@
- //<>// //<>//
+ //<>// //<>// //<>//
 Map cave;
 Battle scene;
 float numBattles;
@@ -9,7 +9,6 @@ boolean hasStepped;
 void setup() {
   size(800, 600);
   cave = new Map();
-  scene = new Battle();
   xOld = cave.px;
   yOld = cave.py;
   System.out.println(yOld);
@@ -34,6 +33,7 @@ void draw() {
     scene.display();
   }
   if (hasStepped && (int)Math.random() * 13 == 0) {
+    scene = new Battle();
     inBattle = true;
     hasStepped = false;
   }
