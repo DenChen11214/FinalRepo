@@ -20,17 +20,23 @@ class Healer extends Classes {
 
   void heal(Classes character) {
     character.hp += 150;
-    cooldown = 1;
+    cooldown = 3;
   }
 
   void dead() {
-    if (hp == 0) {
-      isDead = true;
+    if(hp <= 0){
+      isDead =true;
     }
   }
   void display() {
     //testing
     fill(255);
+<<<<<<< HEAD
     ellipse(x, y, 50, 50);
+=======
+    ellipse(x,y,50,50);
+    fill(0);
+    text("" + hp,x,y);  
+>>>>>>> master
   }
 }

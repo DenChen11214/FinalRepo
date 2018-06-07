@@ -1,19 +1,20 @@
-import java.io.*; //<>// //<>//
-import java.util.*;
+ //<>// //<>//
 Map cave;
 Battle scene;
 float numBattles;
 boolean inBattle = false;
-float xOld, xNew, yOld, yNew;
+float xOld, xNew, yOld, yNew, dis;
 float stepsTaken;
 boolean hasStepped;
 void setup() {
   size(800, 600);
   cave = new Map();
-
   scene = new Battle();
   xOld = cave.px;
   yOld = cave.py;
+  System.out.println(yOld);
+  System.out.println(xOld);
+
 }
 
 void draw() {
@@ -22,17 +23,19 @@ void draw() {
     cave.display();    
     xNew = cave.px;
     yNew = cave.py;
-    if (Math.pow(xNew - xOld, 2) + Math.pow(yNew - yOld, 2) >= 10) {//2nd part of inequality is bound to change when I figure out the size of the player sprite
+    if (Math.pow(xNew - xOld, 2) + Math.pow(yNew - yOld, 2) >= 13) {//2nd part of inequality is bound to change when I figure out the size of the player sprite
       stepsTaken++;
       hasStepped = true;
+      xOld = xNew;
+      yOld = yNew;
     }
+  } else if (inBattle) {
+    scene.moveBar();
+    scene.display();
   }
   if (hasStepped && (int)Math.random() * 13 == 0) {
     inBattle = true;
     hasStepped = false;
-  }
-  if (scene.runAway && inBattle) {
-    inBattle = false;
   }
   if (inBattle) {
     scene.moveBar();

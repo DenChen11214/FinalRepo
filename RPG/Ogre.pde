@@ -8,10 +8,11 @@ class Ogre extends Monsters{
   void attack(Classes character) {
     character.hp -=atk;
   }
-  void dead() {
-    if (hp == 0) {
-      //disappear
+  boolean dead() {
+    if (hp <= 0) {
+      return true;
     }
+    return false;
   }
   void display() {
     //testing

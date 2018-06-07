@@ -5,9 +5,11 @@ class Battle {
   Ogre o;
   Slime s;
   Goblin g;
+  FinalBoss fBoss;
+  MiniBoss mBoss;
   float numMonsters;
   boolean isAttacking = false;
-  boolean runAway = false;
+  boolean isSpecial;
   Battle() {
     numMonsters = (int)(Math.random() * 3) + 1;
     h = new Healer();
@@ -43,23 +45,61 @@ class Battle {
       o = new Ogre(600, 50, width - width/4, 3 * height/4);
     }
   }
+  Battle(int mode) {
+    if (mode == 0) {
+      mBoss = new MiniBoss(1000, 120, width - width/4, height/2);
+      h = new Healer();
+      m = new Mage();
+      w = new Warrior();
+      h.display();
+      m.display();
+      w.display();
+    }
+    if (mode == 1) {
+      fBoss = new FinalBoss(1500, 160, width - width/4, height/2);
+      h = new Healer();
+      m = new Mage();
+      w = new Warrior();
+      h.display();
+      m.display();
+      w.display();
+    }
+  }
+
   void display() {
+    background(255);
+    if((g == null || g.hp <= 0) && (o == null || o.hp <= 0) && (s == null || s.hp <= 0)){
+      inBattle = false;
+    }
     if (numMonsters ==1 ) {
-      g.display();
+      if (!g.dead()) {        
+        g.display();
+      }
     } else if (numMonsters ==2 ) {
-      o.display();
-      s.display();
+      if (!o.dead()) {    
+        o.display();
+      }
+      if (!s.dead()) {
+        s.display();
+      }
     } else {
-      o.display();
-      s.display();
-      g.display();
+      if (!o.dead()) {    
+        o.display();
+      }
+      if (!s.dead()) {
+        s.display();
+      }
+      if (!g.dead()) {
+        g.display();
+      }
     }
     h.display();
     w.display();
     m.display();
+    moveBar();
     buttons();
   }
-  void moveBar() {
+  void moveBar() { 
     fill(80, 80, 255);
     rectMode(CORNERS);
     rect(0, height, 7 * width / 12, 4 * height / 5);
@@ -94,11 +134,9 @@ class Battle {
     }
     text(h.name + "          " + (int)h.hp, 15 * width / 24, 4 * height/ 5 + 19 * height / 120);
   }
-  void buttons() {
+  void buttons() { //makes it so that if attack is clicked, you can select a target and that target will lost hp, run away and the special moves don't work for now
     float textW = textWidth("Attack");
-    float textWW = textWidth("Cleave");
     float textWM = textWidth("Fireball");
-    float textWH = textWidth("Heal");
     float textWR = textWidth("Run Away");
     float textH = textAscent() + textDescent();
     if ((mouseX > (20 - textW / 2))&& (mouseX < (20 + textW)) && mousePressed && (mouseY > 4 * height/ 5 + 5 * height / 120 - textH / 2) && (mouseY < 4 * height/ 5 + 5 * height / 120 + textH / 2)) {
@@ -122,20 +160,35 @@ class Battle {
         }
       }
     }
-    if (w.myTurn) {
-      if ((mouseX > (20 - textWW / 2))&& (mouseX < (20 + textWW)) && mousePressed && (mouseY > 4 * height/ 5 + 12 * height / 120 - textH / 2) && (mouseY < 4 * height/ 5 + 12 * height / 120 + textH / 2)) {
-      }
+    if ((mouseX > (20 - textWM / 2))&& (mouseX < (20 + textWM)) && mousePressed && (mouseY > 4 * height/ 5 + 12 * height / 120 - textH / 2) && (mouseY < 4 * height/ 5 + 12 * height / 120 + textH / 2)) {
+      isSpecial = true;
     }
-    if (m.myTurn) {
-      if ((mouseX > (20 - textWM / 2))&& (mouseX < (20 + textWM)) && mousePressed && (mouseY > 4 * height/ 5 + 12 * height / 120 - textH / 2) && (mouseY < 4 * height/ 5 + 12 * height / 120 + textH / 2)) {
+    if (isSpecial) {
+      if (w.myTurn) {
+        if (w.cooldown == 0) {
+          if (chooseTarget() != null) {
+            w.cleave(chooseTarget());
+            isSpecial = false;
+          }
+        }
       }
-    }
-    if (h.myTurn) {
-      if ((mouseX > (20 - textWH / 2))&& (mouseX < (20 + textWH)) && mousePressed && (mouseY > 4 * height/ 5 + 12 * height / 120 - textH / 2) && (mouseY < 4 * height/ 5 + 12 * height / 120 + textH / 2)) {
+      if (m.myTurn) {
+        if (m.cooldown == 0) {
+          m.fireball(AOE());
+          isSpecial = false;
+        }
+      }
+      if (h.myTurn) {
+        if (h.cooldown == 0) {
+          if (healTarget() != null) {
+            h.heal(healTarget());
+            isSpecial = false;
+          }
+        }
       }
     }
     if ((mouseX > (20 - textWR / 2))&& (mouseX < (20 + textWR)) && mousePressed && (mouseY > 4 * height/ 5 + 19 * height / 120 - textH / 2) && (mouseY < 4 * height/ 5 + 19 * height / 120 + textH / 2)) {
-      runAway = true;
+      inBattle = false;
     }
   }
   Monsters chooseTarget() {
@@ -153,6 +206,31 @@ class Battle {
       if (mouseX > o.x - 25 && mouseX < o.x + 25 && mouseY > o.y - 25 && mouseY < o.y + 25 && mousePressed) {
         return o;
       }
+    }
+    return null;
+  }
+  Monsters[] AOE() {
+    Monsters[] mobs = new Monsters[3];
+    if (g != null) {
+      mobs[0] = g;
+    }
+    if (o != null) {
+      mobs[1] = o;
+    }
+    if (s != null) {
+      mobs[2] = s;
+    }
+    return mobs;
+  }
+  Classes healTarget() {
+    if (mouseX > h.x - 25 && mouseX < h.x + 25 && mouseY > h.y - 25 && mouseY < h.y + 25 && mousePressed) {
+      return h;
+    }
+    if (mouseX > m.x - 25 && mouseX < m.x + 25 && mouseY > m.y - 25 && mouseY < m.y + 25 && mousePressed) {
+      return m;
+    }
+    if (mouseX > w.x - 25 && mouseX < w.x + 25 && mouseY > w.y - 25 && mouseY < w.y + 25 && mousePressed) {
+      return w;
     }
     return null;
   }

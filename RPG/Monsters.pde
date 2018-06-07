@@ -3,8 +3,7 @@ abstract class Monsters {
   float x, y;
   boolean myTurn;
   abstract void attack(Classes character);//attack animation
-  void dead() {//death animation/disappears
-  }
+  abstract boolean dead();//death animation/disappears
   abstract void display();
   String toString(){
     return "" + hp;

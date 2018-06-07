@@ -7,8 +7,8 @@ class Mage extends Classes {
     myTurn = false;
     name = "Chiaki";
     x = width / 4.0;
-    y = height / 2.0;  
-}
+    y = height / 2.0;
+  }
   void attack(Monsters monster) {
     //should trigger the attack animation
     monster.hp -=atk;
@@ -18,14 +18,16 @@ class Mage extends Classes {
   }
 
   void fireball(Monsters[] monsters) {
-    for(int i = 0;i< monsters.length;i++){
-      monsters[i].hp -= atk;
+    for (int i = 0; i< monsters.length; i++) {
+      if (monsters[i] != null) {
+        monsters[i].hp -= atk;
+      }
     }
     cooldown = 3;
   }
 
   void dead() {
-    if (hp == 0) {
+    if (hp <= 0) {
       isDead = true;
     }
   }
@@ -35,5 +37,7 @@ class Mage extends Classes {
     //testing
     fill(255);
     ellipse(x,y,50,50);
+    fill(0);
+    text("" + hp,x,y);  
   }
 }
