@@ -8,4 +8,7 @@ abstract class Monsters {
   String toString(){
     return "" + hp;
   }
+   void setTurn(boolean a){
+    myTurn = a ;
+  }
 }

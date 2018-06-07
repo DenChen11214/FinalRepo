@@ -147,16 +147,21 @@ class Battle {
         if (chooseTarget() != null) {
           w.attack(chooseTarget());
           isAttacking = false;
+          w.setTurn(false);
+          m.setTurn(true);
         }
       } else if (m.myTurn) {
         if (chooseTarget() != null) {
           m.attack(chooseTarget());
           isAttacking = false;
+          m.setTurn(false);
+          h.setTurn(true);
         }
       } else if (h.myTurn) {
         if (chooseTarget() != null) {
           h.attack(chooseTarget());
           isAttacking = false;
+          h.setTurn(false);
         }
       }
     }

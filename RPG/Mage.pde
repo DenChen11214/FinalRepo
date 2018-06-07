@@ -12,7 +12,7 @@ class Mage extends Classes {
   void attack(Monsters monster) {
     //should trigger the attack animation
     monster.hp -=atk;
-    if(cooldown > 0){
+    if (cooldown > 0) {
       cooldown --;
     }
   }
@@ -31,13 +31,12 @@ class Mage extends Classes {
       isDead = true;
     }
   }
-  
-  
+
   void display() {
     //testing
     fill(255);
-    ellipse(x,y,50,50);
+    ellipse(x, y, 50, 50);
     fill(0);
-    text("" + hp,x,y);  
+    text("" + hp, x, y);
   }
 }

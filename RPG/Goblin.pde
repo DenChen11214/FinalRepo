@@ -8,6 +8,7 @@ class Goblin extends Monsters{
   void attack(Classes character) {
     character.hp -=atk;
   }
+  
   boolean dead() {
     if (hp <= 0) {
       return true;

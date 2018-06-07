@@ -29,12 +29,8 @@ class Warrior extends Classes {
   void display() {
     //testing
     fill(255);
-<<<<<<< HEAD
-    ellipse(x, y, 50, 50);
-=======
     ellipse(x,y,50,50);
     fill(0);
-    text("" + hp,x,y);  
->>>>>>> master
+    text("" + hp,x,y);
   }
 }

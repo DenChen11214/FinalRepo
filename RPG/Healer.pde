@@ -28,15 +28,14 @@ class Healer extends Classes {
       isDead =true;
     }
   }
+  
+
+  
   void display() {
     //testing
     fill(255);
-<<<<<<< HEAD
-    ellipse(x, y, 50, 50);
-=======
     ellipse(x,y,50,50);
     fill(0);
     text("" + hp,x,y);  
->>>>>>> master
   }
 }
