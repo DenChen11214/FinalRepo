@@ -40,6 +40,10 @@ class Battle {
     h.display();
     m.display();
     w.display();
+    heroes= new Classes[3];
+    heroes[0] = w;
+    heroes[1] = h;
+    heroes[2] = m;
     if (numMonsters ==1 ) {
       g = new Goblin(400, 70, width - width/4, height/2);
     } else if (numMonsters ==2 ) {
@@ -60,6 +64,10 @@ class Battle {
       h.display();
       m.display();
       w.display();
+      heroes= new Classes[3];
+      heroes[0] = w;
+      heroes[1] = h;
+      heroes[2] = m;
     }
     if (mode == 1) {
       fBoss = new FinalBoss(1500, 160, width - width/4, height/2);
@@ -69,6 +77,10 @@ class Battle {
       h.display();
       m.display();
       w.display();
+      heroes= new Classes[3];
+      heroes[0] = w;
+      heroes[1] = h;
+      heroes[2] = m;
     }
   }
 
@@ -99,9 +111,15 @@ class Battle {
         g.display();
       }
     }
-    h.display();
-    w.display();
-    m.display();
+    if (!h.isDead) {
+      h.display();
+    }
+    if (!w.isDead) {
+      w.display();
+    }
+    if (!m.isDead) {
+      m.display();
+    }
     moveBar();
     buttons();
   }
@@ -140,15 +158,17 @@ class Battle {
     }
     text(h.name + "          " + (int)h.hp, 15 * width / 24, 4 * height/ 5 + 19 * height / 120);
   }
-  void buttons() { //makes it so that if attack is clicked, you can select a target and that target will lost hp, run away and the special moves don't work for now
+  void buttons() {
     float textW = textWidth("Attack");
     float textWM = textWidth("Fireball");
     float textWR = textWidth("Run Away");
     float textH = textAscent() + textDescent();
-    if ((mouseX > (20 - textW / 2))&& (mouseX < (20 + textW)) && mousePressed && (mouseY > 4 * height/ 5 + 5 * height / 120 - textH / 2) && (mouseY < 4 * height/ 5 + 5 * height / 120 + textH / 2)) {
+    if ((mouseX > (20))&& (mouseX < (20 + textW)) && mousePressed && (mouseY > 4 * height/ 5 + 5 * height / 120 - textH) && (mouseY < 4 * height/ 5 + 5 * height / 120)) {
       isAttacking = true;
+      System.out.println("atk");
     }
     if (isAttacking) {
+      System.out.println("isatk");
       w.dead();
       h.dead();
       m.dead();
@@ -172,8 +192,8 @@ class Battle {
           isAttacking = false;
           h.setTurn(false);
           for (Monsters a : AOE()) {
-            int target = (int)(Math.random() * 3);
             if (a != null) {
+              int target = (int)(Math.random() * 3);
               for (int i = 0; i< 3; i++) { 
                 if (a.atk > heroes[i].hp && !heroes[i].isDead) {
                   target = i;
@@ -181,42 +201,62 @@ class Battle {
               }
               a.attack(heroes[target]);
             }
-          }  
+          }
           w.setTurn(true);
         }
       }
-      if ((mouseX > (20 - textWM / 2))&& (mouseX < (20 + textWM)) && mousePressed && (mouseY > 4 * height/ 5 + 12 * height / 120 - textH / 2) && (mouseY < 4 * height/ 5 + 12 * height / 120 + textH / 2)) {
-        isSpecial = true;
-      }
-      if (isSpecial) {
-        if (w.myTurn) {
-          if (w.cooldown == 0) {
-            if (chooseTarget() != null) {
-              w.cleave(chooseTarget());
-              isSpecial = false;
-            }
-          }
-        }
-        if (m.myTurn) {
-          if (m.cooldown == 0) {
-            m.fireball(AOE());
+      System.out.println("endatk");
+    }
+    if ((mouseX > (20))&& (mouseX < (20 + textWM)) && mousePressed && (mouseY > 4 * height/ 5 + 12 * height / 120 - textH) && (mouseY < 4 * height/ 5 + 12 * height / 120)) {
+      isSpecial = true;
+      System.out.println("spec");
+    }
+    if (isSpecial) {
+      System.out.println("isSpec");
+      if (w.myTurn && !w.isDead) {
+        System.out.println(w.cooldown);
+        if (w.cooldown == 0) {
+          if (chooseTarget() != null) {
+            w.cleave(chooseTarget());
             isSpecial = false;
+            w.setTurn(false);
+            m.setTurn(true);
           }
         }
-        if (h.myTurn) {
-          if (h.cooldown == 0) {
-            if (healTarget() != null) {
-              h.heal(healTarget());
-              isSpecial = false;
+      } else if (m.myTurn && !m.isDead) {
+        if (m.cooldown == 0) {
+          m.fireball(AOE());
+          isSpecial = false;
+          m.setTurn(false);
+          h.setTurn(true);
+        }
+      } else if (h.myTurn && !h.isDead) {
+        if (h.cooldown == 0) {
+          if (healTarget() != null) {
+            h.heal(healTarget());
+            isSpecial = false;
+            h.setTurn(false);
+            for (Monsters a : AOE()) {
+              if (a != null) {
+                int target = (int)(Math.random() * 3);
+                for (int i = 0; i< 3; i++) { 
+                  if (a.atk > heroes[i].hp && !heroes[i].isDead) {
+                    target = i;
+                  }
+                }
+                a.attack(heroes[target]);
+              }
             }
+            w.setTurn(true);
           }
         }
-      }
-      if ((mouseX > (20 - textWR / 2))&& (mouseX < (20 + textWR)) && mousePressed && (mouseY > 4 * height/ 5 + 19 * height / 120 - textH / 2) && (mouseY < 4 * height/ 5 + 19 * height / 120 + textH / 2)) {
-        inBattle = false;
       }
     }
+    if ((mouseX > (20))&& (mouseX < (20 + textWR)) && mousePressed && (mouseY > 4 * height/ 5 + 19 * height / 120 - textH) && (mouseY < 4 * height/ 5 + 19 * height / 120)) {
+      inBattle = false;
+    }
   }
+
   Monsters chooseTarget() {
     if (g != null) {
       if (mouseX > g.x - 25 && mouseX < g.x + 25 && mouseY > g.y - 25 && mouseY < g.y + 25 && mousePressed) {
