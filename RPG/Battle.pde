@@ -163,38 +163,53 @@ class Battle {
           h.attack(chooseTarget());
           isAttacking = false;
           h.setTurn(false);
+          for (Monsters a : AOE()) {
+            int target = (int)(Math.random() * 3) + 1;
+            if (a != null) {
+              if(target == 1 && !w.isDead){
+                a.attack(w);
+              }
+              if(target == 2 && !m.isDead){
+                a.attack(m);
+              }
+              if(target == 3 && !h.isDead){
+                a.attack(h);
+              }
+            }
+          }  
+          w.setTurn(true);
         }
       }
-    }
-    if ((mouseX > (20 - textWM / 2))&& (mouseX < (20 + textWM)) && mousePressed && (mouseY > 4 * height/ 5 + 12 * height / 120 - textH / 2) && (mouseY < 4 * height/ 5 + 12 * height / 120 + textH / 2)) {
-      isSpecial = true;
-    }
-    if (isSpecial) {
-      if (w.myTurn) {
-        if (w.cooldown == 0) {
-          if (chooseTarget() != null) {
-            w.cleave(chooseTarget());
+      if ((mouseX > (20 - textWM / 2))&& (mouseX < (20 + textWM)) && mousePressed && (mouseY > 4 * height/ 5 + 12 * height / 120 - textH / 2) && (mouseY < 4 * height/ 5 + 12 * height / 120 + textH / 2)) {
+        isSpecial = true;
+      }
+      if (isSpecial) {
+        if (w.myTurn) {
+          if (w.cooldown == 0) {
+            if (chooseTarget() != null) {
+              w.cleave(chooseTarget());
+              isSpecial = false;
+            }
+          }
+        }
+        if (m.myTurn) {
+          if (m.cooldown == 0) {
+            m.fireball(AOE());
             isSpecial = false;
           }
         }
-      }
-      if (m.myTurn) {
-        if (m.cooldown == 0) {
-          m.fireball(AOE());
-          isSpecial = false;
-        }
-      }
-      if (h.myTurn) {
-        if (h.cooldown == 0) {
-          if (healTarget() != null) {
-            h.heal(healTarget());
-            isSpecial = false;
+        if (h.myTurn) {
+          if (h.cooldown == 0) {
+            if (healTarget() != null) {
+              h.heal(healTarget());
+              isSpecial = false;
+            }
           }
         }
       }
-    }
-    if ((mouseX > (20 - textWR / 2))&& (mouseX < (20 + textWR)) && mousePressed && (mouseY > 4 * height/ 5 + 19 * height / 120 - textH / 2) && (mouseY < 4 * height/ 5 + 19 * height / 120 + textH / 2)) {
-      inBattle = false;
+      if ((mouseX > (20 - textWR / 2))&& (mouseX < (20 + textWR)) && mousePressed && (mouseY > 4 * height/ 5 + 19 * height / 120 - textH / 2) && (mouseY < 4 * height/ 5 + 19 * height / 120 + textH / 2)) {
+        inBattle = false;
+      }
     }
   }
   Monsters chooseTarget() {
