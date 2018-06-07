@@ -12,12 +12,16 @@ class Mage extends Classes {
   void attack(Monsters monster) {
     //should trigger the attack animation
     monster.hp -=atk;
+    if(cooldown > 0){
+      cooldown --;
+    }
   }
 
   void fireball(Monsters[] monsters) {
     for(int i = 0;i< monsters.length;i++){
       monsters[i].hp -= atk;
     }
+    cooldown = 3;
   }
 
   void dead() {
@@ -25,6 +29,8 @@ class Mage extends Classes {
       isDead = true;
     }
   }
+  
+  
   void display() {
     //testing
     fill(255);

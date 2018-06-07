@@ -22,7 +22,7 @@ void draw() {
     cave.display();    
     xNew = cave.px;
     yNew = cave.py;
-    if (Math.pow(xNew - xOld, 2) + Math.pow(yNew - yOld, 2) >= (Math.pow(height, 2) + Math.pow(width, 2)) / 20) {//2nd part of inequality is bound to change when I figure out the size of the player sprite
+    if (Math.pow(xNew - xOld, 2) + Math.pow(yNew - yOld, 2) >= 10) {//2nd part of inequality is bound to change when I figure out the size of the player sprite
       stepsTaken++;
       hasStepped = true;
     }

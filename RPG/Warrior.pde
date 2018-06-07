@@ -11,10 +11,14 @@ class Warrior extends Classes {
   }
   void attack(Monsters monster) {
     //should trigger the attack animation
-      monster.hp -= atk;
+    monster.hp -= atk;
+    if (cooldown > 0) {
+      cooldown --;
+    }
   }
   void cleave(Monsters monster) {
     monster.hp -=2 * atk;
+    cooldown = 2;
   }
 
   void dead() {
@@ -25,6 +29,6 @@ class Warrior extends Classes {
   void display() {
     //testing
     fill(255);
-    ellipse(x,y,50,50);
+    ellipse(x, y, 50, 50);
   }
 }

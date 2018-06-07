@@ -6,16 +6,21 @@ class Healer extends Classes {
     isDead = false;
     myTurn = false;
     name = "Cyril";
-    x = width / 4;;
+    x = width / 4;
+    ;
     y = 3 * height / 4.0;
   }
   void attack(Monsters monster) {
     //should trigger the attack animation
     monster.hp -=atk;
+    if (cooldown > 0) {
+      cooldown --;
+    }
   }
 
   void heal(Classes character) {
     character.hp += 150;
+    cooldown = 1;
   }
 
   void dead() {
@@ -26,6 +31,6 @@ class Healer extends Classes {
   void display() {
     //testing
     fill(255);
-    ellipse(x,y,50,50);
+    ellipse(x, y, 50, 50);
   }
 }
