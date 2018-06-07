@@ -48,10 +48,11 @@ class Map {
     }
     fill(255);
     rect(50*px, 50*py, 50, 50);
+
   }
 
-  void update(int x, int y){
-    if(isValid(x,y)){
+  void update(int x, int y) {
+    if (isValid(x, y)) {
       px += x;
       py += y;
     }
@@ -64,4 +65,4 @@ class Map {
       return true;
     }
   }
-}
+    }
