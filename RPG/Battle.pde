@@ -6,12 +6,15 @@ class Battle {
   FinalBoss fBoss;
   MiniBoss mBoss;
   Classes[] heroes; 
+  PImage background;
   float numMonsters;
   boolean isAttacking = false;
   boolean isSpecial;
   boolean isBossFight;
   LinkedList<Classes> turnSystem = new LinkedList();
   Battle() {
+    background = loadImage("battleground.png");
+    background.resize(720,720);
     isBossFight = false;
     numMonsters = (int)(Math.random() * 3) + 1;
     heroes= new Classes[3];
@@ -36,6 +39,8 @@ class Battle {
     turnSystem.add(h);
   }
   Battle(float monsters) {
+    background = loadImage("battleground.png");
+    background.resize(720,720);
     isBossFight = false;
     numMonsters = monsters;
     h.display();
@@ -63,6 +68,8 @@ class Battle {
     turnSystem.add(h);
   }
   Battle(int mode) {
+    background = loadImage("battleground.png");
+    background.resize(720,720);
     isBossFight = true;
     if (mode == 0) {
       mBoss = new MiniBoss(1000, 120, width - width/4, height/2);
@@ -93,7 +100,7 @@ class Battle {
   }
 
   void display() {
-    background(255);
+    image(background,0,0);
     if (isBossFight) {
       if (mBoss != null) {
         if (mBoss.hp <= 0) {
