@@ -2,13 +2,21 @@ class Map {
   char[][] base;
   int px;
   int py;
-
-
+  PImage walls,floor,stairs,u;
+  
   Map() {
     String[] lines = loadStrings("Room.txt");  
     int row = lines.length;
     int col = lines[0].length();
     int  i = 0;
+    u = loadImage("kain_sprite.png");
+    u.resize(30,30);
+    walls = loadImage("stone4_b.jpg");
+    walls.resize(30,30);
+    floor = loadImage("dirt.jpg");
+    floor.resize(30,30);
+    stairs = loadImage("stairs.jpg");
+    stairs.resize(30,30);
     base = new char[row][col];
     for (int r = 0; r < row; r++) {
       for (int c = 0; c < col; c++) {
@@ -39,15 +47,17 @@ class Map {
     for (int i = 0; i < base.length; i++) {
       for (int j = 0; j< base[1].length; j++) {
         if (base[i][j] == '#') {
-          fill(80);
-        } else {
-          fill(0);
+          image(walls,30*i,30*j);
+        } 
+        else if(base[i][j] == 'E'){
+          image(stairs,30*i,30*j);
         }
-        rect(50* i, 50*j, 50, 50);
+          else {
+          image(floor,30*i,30*j);
+        }
       }
     }
-    fill(255);
-    rect(50*px, 50*py, 50, 50);
+    image(u,30*px,30*py);
 
   }
 
@@ -65,4 +75,4 @@ class Map {
       return true;
     }
   }
-    }
+}

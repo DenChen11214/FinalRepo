@@ -1,4 +1,4 @@
- //<>// //<>//
+ //<>// //<>// //<>//
 Map cave;
 Battle scene;
 float numBattles;
@@ -10,7 +10,7 @@ Healer h;
 Mage m;
 Warrior w;
 void setup() {
-  size(800, 600);
+  size(720, 720);
   cave = new Map();
   h = new Healer();
   m = new Mage();
