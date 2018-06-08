@@ -8,7 +8,6 @@ class Healer extends Classes {
     myTurn = false;
     name = "Cyril";
     x = width / 4;
-    ;
     y = 3 * height / 4.0;
   }
   void attack(Monsters monster) {
@@ -20,13 +19,11 @@ class Healer extends Classes {
   }
 
   void heal(Classes character) {
-    if(character.hp == character.maxHp){
-      return;
-    }
     if(character.hp + 150 > character.maxHp){
-      character.hp = character.maxHp;
+      float h = character.maxHp - character.hp;
+      character.hp += h;
     }
-    else {
+    else{
       character.hp += 150;
     }
     cooldown = 3;

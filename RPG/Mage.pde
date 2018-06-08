@@ -6,7 +6,7 @@ class Mage extends Classes {
     cooldown = 0;
     isDead = false;
     myTurn = false;
-    name = "Chiaki";
+    name = "Palom";
     x = width / 4.0;
     y = height / 2.0;
   }

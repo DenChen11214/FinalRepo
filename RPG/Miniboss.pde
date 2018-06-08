@@ -6,7 +6,13 @@ class MiniBoss extends Monsters{
     y = y_;
   }
   void attack(Classes character) {//in battle, make it so that theres a half chance that it does hitAll and half chance it hits a random mob
-    character.hp -=atk;
+    Classes[] players = {h,m,w};
+    if((int)(Math.random() * 2) == 1){
+      character.hp -=atk;
+    }
+    else{
+      hitAll(players);
+    }
   }
   void hitAll(Classes[] players){
     for(int i =0;i< players.length;i++){

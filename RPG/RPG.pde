@@ -1,4 +1,4 @@
- //<>// //<>//
+ //<>//
 Map cave;
 Battle scene;
 float numBattles;
@@ -19,7 +19,6 @@ void setup() {
   yOld = cave.py;
   System.out.println(yOld);
   System.out.println(xOld);
-
 }
 
 void draw() {
@@ -50,16 +49,18 @@ void draw() {
 }
 
 void keyPressed() {
-  if (keyCode == 'W' || keyCode == 'w') {
-    cave.update(0, -1);
-  }
-  if (keyCode == 'S' || keyCode == 's') {
-    cave.update(0, 1);
-  }
-  if (keyCode == 'A' || keyCode == 'a') {
-    cave.update(-1, 0);
-  }
-  if (keyCode == 'D' || keyCode == 'd') {
-    cave.update(1, 0);
+  if (!inBattle) {
+    if (keyCode == 'W' || keyCode == 'w') {
+      cave.update(0, -1);
+    }
+    if (keyCode == 'S' || keyCode == 's') {
+      cave.update(0, 1);
+    }
+    if (keyCode == 'A' || keyCode == 'a') {
+      cave.update(-1, 0);
+    }
+    if (keyCode == 'D' || keyCode == 'd') {
+      cave.update(1, 0);
+    }
   }
 }
