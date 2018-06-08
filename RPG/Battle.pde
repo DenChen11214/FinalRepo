@@ -1,3 +1,4 @@
+import java.util.*;
 class Battle {
   Ogre o;
   Slime s;
@@ -9,6 +10,7 @@ class Battle {
   boolean isAttacking = false;
   boolean isSpecial;
   boolean isBossFight;
+  LinkedList<Classes> turnSystem = new LinkedList();
   Battle() {
     isBossFight = false;
     numMonsters = (int)(Math.random() * 3) + 1;
@@ -29,6 +31,9 @@ class Battle {
     w.setTurn(true);
     h.setTurn(false);
     m.setTurn(false);
+    turnSystem.add(w);
+    turnSystem.add(m);
+    turnSystem.add(h);
   }
   Battle(float monsters) {
     isBossFight = false;
@@ -53,6 +58,9 @@ class Battle {
     w.setTurn(true);
     h.setTurn(false);
     m.setTurn(false);
+    turnSystem.add(w);
+    turnSystem.add(m);
+    turnSystem.add(h);
   }
   Battle(int mode) {
     isBossFight = true;
@@ -79,6 +87,9 @@ class Battle {
     w.setTurn(true);
     h.setTurn(false);
     m.setTurn(false);
+    turnSystem.add(w);
+    turnSystem.add(m);
+    turnSystem.add(h);
   }
 
   void display() {
@@ -193,22 +204,104 @@ class Battle {
     float textWM = textWidth("Fireball");
     float textWR = textWidth("Run Away");
     float textH = textAscent() + textDescent();
-    if (w.myTurn && !w.isDead) {
-      if ((mouseX > (20))&& (mouseX < (20 + textW)) && mousePressed && (mouseY > 4 * height/ 5 + 5 * height / 120 - textH) && (mouseY < 4 * height/ 5 + 5 * height / 120)) {
-        isAttacking = true;
-      } else if ((mouseX > (20))&& (mouseX < (20 + textWM)) && mousePressed && (mouseY > 4 * height/ 5 + 12 * height / 120 - textH) && (mouseY < 4 * height/ 5 + 12 * height / 120)) {
-        isSpecial = true;
+    if (w.myTurn) {
+      if (w.isDead) {
+        turnSystem.getFirst().setTurn(false);
+        turnSystem.addLast(turnSystem.removeFirst());
+        turnSystem.getFirst().setTurn(true);
+      } else {
+        if ((mouseX > (20))&& (mouseX < (20 + textW)) && mousePressed && (mouseY > 4 * height/ 5 + 5 * height / 120 - textH) && (mouseY < 4 * height/ 5 + 5 * height / 120)) {
+          isAttacking = true;
+        } else if ((mouseX > (20))&& (mouseX < (20 + textWM)) && mousePressed && (mouseY > 4 * height/ 5 + 12 * height / 120 - textH) && (mouseY < 4 * height/ 5 + 12 * height / 120)) {
+          isSpecial = true;
+        }
+        if (isAttacking) {
+          if (chooseTarget() != null) {
+            w.attack(chooseTarget());
+            isAttacking = false;
+            turnSystem.getFirst().setTurn(false);
+            turnSystem.addLast(turnSystem.removeFirst());
+            turnSystem.getFirst().setTurn(true);
+          }
+        } else if (isSpecial) {
+          if (w.cooldown == 0) {
+            if (chooseTarget() != null) {
+              w.cleave(chooseTarget());
+              isSpecial = false;
+              turnSystem.getFirst().setTurn(false);
+              turnSystem.addLast(turnSystem.removeFirst());
+              turnSystem.getFirst().setTurn(true);
+            }
+          }
+        }
       }
-      if (isAttacking) {
-        if (chooseTarget() != null) {
-          w.attack(chooseTarget());
-          isAttacking = false;
-          w.setTurn(false);
-          if (!m.isDead) {
-            m.setTurn(true);
-          } else if (!h.isDead) {
-            h.setTurn(true);
-          } else {
+    } else if (m.myTurn) {
+      if (m.isDead) {
+        turnSystem.getFirst().setTurn(false);
+        turnSystem.addLast(turnSystem.removeFirst());
+        turnSystem.getFirst().setTurn(true);
+      } else {
+        if ((mouseX > (20))&& (mouseX < (20 + textW)) && mousePressed && (mouseY > 4 * height/ 5 + 5 * height / 120 - textH) && (mouseY < 4 * height/ 5 + 5 * height / 120)) {
+          isAttacking = true;
+        } else if ((mouseX > (20))&& (mouseX < (20 + textWM)) && mousePressed && (mouseY > 4 * height/ 5 + 12 * height / 120 - textH) && (mouseY < 4 * height/ 5 + 12 * height / 120)) {
+          isSpecial = true;
+        }
+        if (isAttacking) {
+          if (chooseTarget() != null) {
+            m.attack(chooseTarget());
+            isAttacking = false;
+            turnSystem.getFirst().setTurn(false);
+            turnSystem.addLast(turnSystem.removeFirst());
+            turnSystem.getFirst().setTurn(true);
+          }
+        } else if (isSpecial) {
+          if (m.cooldown == 0) {
+            m.fireball(AOE());
+            isSpecial = false;
+            turnSystem.getFirst().setTurn(false);
+            turnSystem.addLast(turnSystem.removeFirst());
+            turnSystem.getFirst().setTurn(true);
+          }
+        }
+      }
+    } else if (h.myTurn) {
+      if (h.isDead) {
+        turnSystem.getFirst().setTurn(false);
+        turnSystem.addLast(turnSystem.removeFirst());
+        turnSystem.getFirst().setTurn(true);
+        for (Monsters a : AOE()) {
+          if (a != null) {
+            boolean lowHp = false;
+            int target = (int)(Math.random() * 3);
+            for (int i = 0; i< 3; i++) { 
+              if (a.atk > heroes[i].hp && !heroes[i].isDead) {
+                target = i;
+                lowHp = true;
+              }
+            }
+            if (lowHp) {
+              a.attack(heroes[target]);
+            } else {
+              while (heroes[target].hp <= 0) {
+                target = (int)(Math.random() * 3);
+              }
+              a.attack(heroes[target]);
+            }
+          }
+        }
+      } else {
+        if ((mouseX > (20))&& (mouseX < (20 + textW)) && mousePressed && (mouseY > 4 * height/ 5 + 5 * height / 120 - textH) && (mouseY < 4 * height/ 5 + 5 * height / 120)) {
+          isAttacking = true;
+        } else if ((mouseX > (20))&& (mouseX < (20 + textWM)) && mousePressed && (mouseY > 4 * height/ 5 + 12 * height / 120 - textH) && (mouseY < 4 * height/ 5 + 12 * height / 120)) {
+          isSpecial = true;
+        }
+        if (isAttacking) {
+          if (chooseTarget() != null) {
+            h.attack(chooseTarget());
+            isAttacking = false;
+            turnSystem.getFirst().setTurn(false);
+            turnSystem.addLast(turnSystem.removeFirst());
+            turnSystem.getFirst().setTurn(true);
             for (Monsters a : AOE()) {
               if (a != null) {
                 boolean lowHp = false;
@@ -229,23 +322,17 @@ class Battle {
                 }
               }
             }
-            w.dead();
-            m.dead();
-            h.dead();
-            w.setTurn(true);
           }
-        }
-      } else if (isSpecial) {
-        if (w.cooldown == 0) {
-          if (chooseTarget() != null) {
-            w.cleave(chooseTarget());
-            isSpecial = false;
-            w.setTurn(false);
-            if (!m.isDead) {
-              m.setTurn(true);
-            } else if (!h.isDead) {
-              h.setTurn(true);
-            } else {
+        } else if (isSpecial) {
+          if (h.cooldown == 0) {
+            if (healTarget() != null) {
+            }
+            if (healTarget()!= null && healTarget().hp != healTarget().maxHp) {
+              h.heal(healTarget());
+              isSpecial = false;
+              turnSystem.getFirst().setTurn(false);
+              turnSystem.addLast(turnSystem.removeFirst());
+              turnSystem.getFirst().setTurn(true);
               for (Monsters a : AOE()) {
                 if (a != null) {
                   boolean lowHp = false;
@@ -266,180 +353,6 @@ class Battle {
                   }
                 }
               }
-              w.dead();
-              m.dead();
-              h.dead();
-              w.setTurn(true);
-            }
-          }
-        }
-      }
-    } else if (m.myTurn && !m.isDead) {
-      if ((mouseX > (20))&& (mouseX < (20 + textW)) && mousePressed && (mouseY > 4 * height/ 5 + 5 * height / 120 - textH) && (mouseY < 4 * height/ 5 + 5 * height / 120)) {
-        isAttacking = true;
-      } else if ((mouseX > (20))&& (mouseX < (20 + textWM)) && mousePressed && (mouseY > 4 * height/ 5 + 12 * height / 120 - textH) && (mouseY < 4 * height/ 5 + 12 * height / 120)) {
-        isSpecial = true;
-      }
-      if (isAttacking) {
-        if (chooseTarget() != null) {
-          m.attack(chooseTarget());
-          isAttacking = false;
-          m.setTurn(false);
-          if (h.isDead) {
-            for (Monsters a : AOE()) {
-              if (a != null) {
-                boolean lowHp = false;
-                int target = (int)(Math.random() * 3);
-                for (int i = 0; i< 3; i++) { 
-                  if (a.atk > heroes[i].hp && !heroes[i].isDead) {
-                    target = i;
-                    lowHp = true;
-                  }
-                }
-                if (lowHp) {
-                  a.attack(heroes[target]);
-                } else {
-                  while (heroes[target].hp <= 0) {
-                    target = (int)(Math.random() * 3);
-                  }
-                  a.attack(heroes[target]);
-                }
-              }
-            }
-            w.dead();
-            m.dead();
-            h.dead();
-          }
-          if (!h.isDead) {
-            h.setTurn(true);
-          } else if (!w.isDead) {
-            w.setTurn(true);
-          } else {
-            m.setTurn(true);
-          }
-        }
-      } else if (isSpecial) {
-        if (m.cooldown == 0) {
-          m.fireball(AOE());
-          isSpecial = false;
-          m.setTurn(false);
-          if (h.isDead) {
-            for (Monsters a : AOE()) {
-              if (a != null) {
-                boolean lowHp = false;
-                int target = (int)(Math.random() * 3);
-                for (int i = 0; i< 3; i++) { 
-                  if (a.atk > heroes[i].hp && !heroes[i].isDead) {
-                    target = i;
-                    lowHp = true;
-                  }
-                }
-                if (lowHp) {
-                  a.attack(heroes[target]);
-                } else {
-                  while (heroes[target].hp <= 0) {
-                    target = (int)(Math.random() * 3);
-                  }
-                  a.attack(heroes[target]);
-                }
-              }
-            }
-            w.dead();
-            m.dead();
-            h.dead();
-          } 
-          if (!h.isDead) {
-            h.setTurn(true);
-          } else if (!w.isDead) {
-            w.setTurn(true);
-          } else {
-            m.setTurn(true);
-          }
-        }
-      }
-    } else if (h.myTurn && !h.isDead) {
-      if ((mouseX > (20))&& (mouseX < (20 + textW)) && mousePressed && (mouseY > 4 * height/ 5 + 5 * height / 120 - textH) && (mouseY < 4 * height/ 5 + 5 * height / 120)) {
-        isAttacking = true;
-      } else if ((mouseX > (20))&& (mouseX < (20 + textWM)) && mousePressed && (mouseY > 4 * height/ 5 + 12 * height / 120 - textH) && (mouseY < 4 * height/ 5 + 12 * height / 120)) {
-        isSpecial = true;
-      }
-      if (isAttacking) {
-        if (chooseTarget() != null) {
-          h.attack(chooseTarget());
-          isAttacking = false;
-          h.setTurn(false);
-          for (Monsters a : AOE()) {
-            if (a != null) {
-              boolean lowHp = false;
-              int target = (int)(Math.random() * 3);
-              for (int i = 0; i< 3; i++) { 
-                if (a.atk > heroes[i].hp && !heroes[i].isDead) {
-                  target = i;
-                  lowHp = true;
-                }
-              }
-              if (lowHp) {
-                a.attack(heroes[target]);
-              } else {
-                while (heroes[target].hp <= 0) {
-                  target = (int)(Math.random() * 3);
-                }
-                a.attack(heroes[target]);
-              }
-            }
-          }
-          w.dead();
-          m.dead();
-          h.dead();
-          if (!w.isDead) {
-            w.setTurn(true);
-          } else if (!m.isDead) {
-            m.setTurn(true);
-          } else {
-            h.setTurn(true);
-          }
-        }
-      } else if (isSpecial) {
-        System.out.println(h.cooldown);
-        if (h.cooldown == 0) {
-          if(healTarget() != null){
-            System.out.println(healTarget().hp);
-            System.out.println(healTarget().maxHp);
-          }
-          if (healTarget()!= null && healTarget().hp != healTarget().maxHp) {
-            System.out.println("asd");
-            h.heal(healTarget());
-            isSpecial = false;
-            h.setTurn(false);
-            for (Monsters a : AOE()) {
-              if (a != null) {
-                boolean lowHp = false;
-                int target = (int)(Math.random() * 3);
-                for (int i = 0; i< 3; i++) { 
-                  if (a.atk > heroes[i].hp && !heroes[i].isDead) {
-                    target = i;
-                    lowHp = true;
-                  }
-                }
-                if (lowHp) {
-                  a.attack(heroes[target]);
-                } else {
-                  while (heroes[target].hp <= 0) {
-                    target = (int)(Math.random() * 3);
-                  }
-                  a.attack(heroes[target]);
-                }
-              }
-            }
-            w.dead();
-            m.dead();
-            h.dead();
-            if (!w.isDead) {
-              w.setTurn(true);
-            } else if (!m.isDead) {
-              m.setTurn(true);
-            } else {
-              h.setTurn(true);
             }
           }
         }
