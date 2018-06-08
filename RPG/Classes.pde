@@ -1,5 +1,5 @@
 abstract class Classes {
-  float hp, atk, cooldown;
+  float hp, atk, cooldown,maxHp;
   boolean isDead;
   boolean myTurn;
   String name;

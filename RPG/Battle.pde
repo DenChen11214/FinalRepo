@@ -1,7 +1,4 @@
 class Battle {
-  Healer h;
-  Mage m;
-  Warrior w;
   Ogre o;
   Slime s;
   Goblin g;
@@ -11,11 +8,9 @@ class Battle {
   float numMonsters;
   boolean isAttacking = false;
   boolean isSpecial;
+  boolean validHeal = true;
   Battle() {
     numMonsters = (int)(Math.random() * 3) + 1;
-    h = new Healer();
-    m = new Mage();
-    w = new Warrior();
     heroes= new Classes[3];
     heroes[0] = w;
     heroes[1] = h;
@@ -31,12 +26,11 @@ class Battle {
       o = new Ogre(600, 50, width - width/4, 3 * height/4);
     }
     w.setTurn(true);
+    h.setTurn(false);
+    m.setTurn(false);
   }
   Battle(float monsters) {
     numMonsters = monsters;
-    h = new Healer();
-    m = new Mage();
-    w = new Warrior();
     h.display();
     m.display();
     w.display();
@@ -54,13 +48,13 @@ class Battle {
       s = new Slime(500, 60, width - width/4, height/2);
       o = new Ogre(600, 50, width - width/4, 3 * height/4);
     }
+    w.setTurn(true);
+    h.setTurn(false);
+    m.setTurn(false);
   }
   Battle(int mode) {
     if (mode == 0) {
       mBoss = new MiniBoss(1000, 120, width - width/4, height/2);
-      h = new Healer();
-      m = new Mage();
-      w = new Warrior();
       h.display();
       m.display();
       w.display();
@@ -71,9 +65,6 @@ class Battle {
     }
     if (mode == 1) {
       fBoss = new FinalBoss(1500, 160, width - width/4, height/2);
-      h = new Healer();
-      m = new Mage();
-      w = new Warrior();
       h.display();
       m.display();
       w.display();
@@ -82,6 +73,9 @@ class Battle {
       heroes[1] = h;
       heroes[2] = m;
     }
+    w.setTurn(true);
+    h.setTurn(false);
+    m.setTurn(false);
   }
 
   void display() {
@@ -388,36 +382,38 @@ class Battle {
           if (healTarget() != null) {
             h.heal(healTarget());
             isSpecial = false;
-            h.setTurn(false);
-            for (Monsters a : AOE()) {
-              if (a != null) {
-                boolean lowHp = false;
-                int target = (int)(Math.random() * 3);
-                for (int i = 0; i< 3; i++) { 
-                  if (a.atk > heroes[i].hp && !heroes[i].isDead) {
-                    target = i;
-                    lowHp = true;
+            if (validHeal) {
+              h.setTurn(false);
+              for (Monsters a : AOE()) {
+                if (a != null) {
+                  boolean lowHp = false;
+                  int target = (int)(Math.random() * 3);
+                  for (int i = 0; i< 3; i++) { 
+                    if (a.atk > heroes[i].hp && !heroes[i].isDead) {
+                      target = i;
+                      lowHp = true;
+                    }
                   }
-                }
-                if (lowHp) {
-                  a.attack(heroes[target]);
-                } else {
-                  while (heroes[target].hp <= 0) {
-                    target = (int)(Math.random() * 3);
+                  if (lowHp) {
+                    a.attack(heroes[target]);
+                  } else {
+                    while (heroes[target].hp <= 0) {
+                      target = (int)(Math.random() * 3);
+                    }
+                    a.attack(heroes[target]);
                   }
-                  a.attack(heroes[target]);
                 }
               }
-            }
-            w.dead();
-            m.dead();
-            h.dead();
-            if (!w.isDead) {
-              w.setTurn(true);
-            } else if (!m.isDead) {
-              m.setTurn(true);
-            } else {
-              h.setTurn(true);
+              w.dead();
+              m.dead();
+              h.dead();
+              if (!w.isDead) {
+                w.setTurn(true);
+              } else if (!m.isDead) {
+                m.setTurn(true);
+              } else {
+                h.setTurn(true);
+              }
             }
           }
         }
@@ -461,12 +457,30 @@ class Battle {
   }
   Classes healTarget() {
     if (mouseX > h.x - 25 && mouseX < h.x + 25 && mouseY > h.y - 25 && mouseY < h.y + 25 && mousePressed) {
+      if (h.hp == h.maxHp) {
+        validHeal = false;
+      }
+      else{
+        validHeal = true;
+      }
       return h;
     }
-    if (mouseX > m.x - 25 && mouseX < m.x + 25 && mouseY > m.y - 25 && mouseY < m.y + 25 && mousePressed) {
+    else if (mouseX > m.x - 25 && mouseX < m.x + 25 && mouseY > m.y - 25 && mouseY < m.y + 25 && mousePressed) {
+      if (m.hp == m.maxHp) {
+        validHeal = false;
+      }
+      else{
+        validHeal = true;
+      }
       return m;
     }
-    if (mouseX > w.x - 25 && mouseX < w.x + 25 && mouseY > w.y - 25 && mouseY < w.y + 25 && mousePressed) {
+    else if (mouseX > w.x - 25 && mouseX < w.x + 25 && mouseY > w.y - 25 && mouseY < w.y + 25 && mousePressed) {
+      if (w.hp == w.maxHp) {
+        validHeal = false;
+      }
+      else{
+        validHeal = true;
+      }
       return w;
     }
     return null;

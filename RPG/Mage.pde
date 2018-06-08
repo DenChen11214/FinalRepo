@@ -2,6 +2,7 @@ class Mage extends Classes {
   Mage() {
     atk = 75;
     hp = 200;
+    maxHp = 200;
     cooldown = 0;
     isDead = false;
     myTurn = false;

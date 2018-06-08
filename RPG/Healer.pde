@@ -2,6 +2,7 @@ class Healer extends Classes {
   Healer() {
     atk = 25;
     hp = 250;
+    maxHp = 250;
     cooldown = 0;
     isDead = false;
     myTurn = false;
@@ -19,7 +20,15 @@ class Healer extends Classes {
   }
 
   void heal(Classes character) {
-    character.hp += 150;
+    if(character.hp == character.maxHp){
+      return;
+    }
+    if(character.hp + 150 > character.maxHp){
+      character.hp = character.maxHp;
+    }
+    else {
+      character.hp += 150;
+    }
     cooldown = 3;
   }
 

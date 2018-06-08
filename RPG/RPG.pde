@@ -1,4 +1,4 @@
- //<>// //<>// //<>//
+ //<>// //<>//
 Map cave;
 Battle scene;
 float numBattles;
@@ -6,9 +6,15 @@ boolean inBattle = false;
 float xOld, xNew, yOld, yNew, dis;
 float stepsTaken;
 boolean hasStepped;
+Healer h;
+Mage m;
+Warrior w;
 void setup() {
   size(800, 600);
   cave = new Map();
+  h = new Healer();
+  m = new Mage();
+  w = new Warrior();
   xOld = cave.px;
   yOld = cave.py;
   System.out.println(yOld);
