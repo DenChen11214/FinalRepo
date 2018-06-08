@@ -4,7 +4,7 @@ class Map {
   int py;
   int bx;
   int by;
-  PImage walls,floor,stairs,u,boss;
+  PImage walls,floor,stairs,u;
   
   Map() {
     String[] lines = loadStrings("Room.txt");  
@@ -19,8 +19,6 @@ class Map {
     floor.resize(30,30);
     stairs = loadImage("stairs.jpg");
     stairs.resize(30,30);
-    boss = loadImage("Boss.png");
-    boss.resize(30,30);
     base = new char[row][col];
     for (int r = 0; r < row; r++) {
       for (int c = 0; c < col; c++) {
@@ -29,10 +27,10 @@ class Map {
           px = r;
           py = c;
         }
-          if(base[r][c] =='O'){
-            bx =r;
-            by = c;
-          }
+        if(base[r][c] == 'O'){
+          bx =r;
+          by = c;
+        }
         i++;
       }
       i = 0;
@@ -59,9 +57,6 @@ class Map {
         } 
         else if(base[i][j] == 'E'){
           image(stairs,30*i,30*j);
-        }
-        else if(base[i][j] == 'O'){
-          image(boss,30*i,30*j);
         }
           else {
           image(floor,30*i,30*j);

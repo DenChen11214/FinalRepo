@@ -1,4 +1,4 @@
- //<>//
+ //<>// //<>//
 Map cave;
 Battle scene;
 float numBattles;
@@ -27,6 +27,11 @@ void draw() {
     cave.display();    
     xNew = cave.px;
     yNew = cave.py;
+    if(xNew == cave.bx && yNew == cave.by){
+      scene = new Battle(1);
+      inBattle = true;
+      hasStepped = false;
+    }
     if (Math.pow(xNew - xOld, 2) + Math.pow(yNew - yOld, 2) >= 13) {//2nd part of inequality is bound to change when I figure out the size of the player sprite
       stepsTaken++;
       hasStepped = true;
