@@ -289,6 +289,9 @@ class Battle {
             }
           }
         }
+        w.dead();
+        h.dead();
+        m.dead();
       } else {
         if ((mouseX > (20))&& (mouseX < (20 + textW)) && mousePressed && (mouseY > 4 * height/ 5 + 5 * height / 120 - textH) && (mouseY < 4 * height/ 5 + 5 * height / 120)) {
           isAttacking = true;
@@ -323,6 +326,9 @@ class Battle {
               }
             }
           }
+          w.dead();
+          h.dead();
+          m.dead();
         } else if (isSpecial) {
           if (h.cooldown == 0) {
             if (healTarget() != null) {
@@ -353,6 +359,9 @@ class Battle {
                   }
                 }
               }
+              w.dead();
+              h.dead();
+              m.dead();
             }
           }
         }
