@@ -409,19 +409,19 @@ class Battle {
   }
   Monsters[] AOE() {
     Monsters[] mobs = new Monsters[5];
-    if (g != null) {
+    if (g != null && g.hp > 0) {
       mobs[0] = g;
     }
-    if (o != null) {
+    if (o != null && o.hp > 0) {
       mobs[1] = o;
     }
-    if (s != null) {
+    if (s != null && s.hp > 0) {
       mobs[2] = s;
     }
-    if (mBoss != null) {
+    if (mBoss != null && mBoss.hp > 0) {
       mobs[3] = mBoss;
     }
-    if (fBoss != null) {
+    if (fBoss != null && fBoss.hp > 0) {
       mobs[4] = fBoss;
     }
     return mobs;
