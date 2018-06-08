@@ -2,13 +2,15 @@ class Map {
   char[][] base;
   int px;
   int py;
-  PImage walls,floor,stairs;
+  PImage walls,floor,stairs,u;
   
   Map() {
     String[] lines = loadStrings("Room.txt");  
     int row = lines.length;
     int col = lines[0].length();
     int  i = 0;
+    u = loadImage("kain_sprite.png");
+    u.resize(30,30);
     walls = loadImage("stone4_b.jpg");
     walls.resize(30,30);
     floor = loadImage("dirt.jpg");
@@ -55,8 +57,7 @@ class Map {
         }
       }
     }
-    fill(255);
-    rect(30*px, 30*py, 30, 30);
+    image(u,30*px,30*py);
 
   }
 
