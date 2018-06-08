@@ -161,11 +161,11 @@ class Battle {
     textSize(height / 30);
     text("Attack", 20, 4 * height/ 5 + 5 * height / 120);
     if (w.myTurn) {
-      text("Cleave", 20, 4 * height/ 5 + 12 * height / 120);
+      text("Cleave" + "    Cooldown:" + w.cooldown, 20, 4 * height/ 5 + 12 * height / 120);
     } else if (m.myTurn) {
-      text("Fireball", 20, 4 * height/ 5 + 12 * height / 120);
+      text("Fireball" + "    Cooldown:" + m.cooldown, 20, 4 * height/ 5 + 12 * height / 120);
     } else if (h.myTurn) {
-      text("Heal", 20, 4 * height/ 5 + 12 * height / 120);
+      text("Heal" + "    Cooldown:" + h.cooldown, 20, 4 * height/ 5 + 12 * height / 120);
     }
     text("Run Away", 20, 4 * height/ 5 + 19 * height / 120);
     if (w.myTurn && !w.isDead) {
