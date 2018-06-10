@@ -156,6 +156,7 @@ class Battle {
     }
     if (h.isDead && m.isDead && w.isDead) {
       inBattle = false;
+      gameOver = true;
     }
 
     moveBar();

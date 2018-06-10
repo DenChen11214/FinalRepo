@@ -1,4 +1,4 @@
-import java.util.*; //<>//
+import java.util.*; //<>// //<>//
 Map cave;
 Battle scene;
 float numBattles;
@@ -25,48 +25,67 @@ void setup() {
   gameOver = false;
   background(0);
   textSize(32);
-  text("BUDGETED BOOTLEGGED FINAL FANTASY", 50, height/2-100);
+  textAlign(CENTER);
+  rectMode(CENTER);
+  text("BUDGETED BOOTLEGGED FINAL FANTASY", width / 2, height/4);
   fill(255);
-  rect(250,height / 2,200,70);
+  rect(width / 2, height / 2 - 10, 200, 100);
   fill(0);
   textSize(32);
-  text("Start",width/2-45,height/2 + 50);
+  text("Start", width/2, height /2);
+  textAlign(CORNER);
+  rectMode(CORNER);
 }
 
 void draw() {
-  if (start) {
-    if (!inBattle) {
-      cave.display();    
-      xNew = cave.px;
-      yNew = cave.py;
-      if (xNew == cave.bx && yNew == cave.by) {
-        scene = new Battle(0);
+  if (gameOver) {
+    delay(3000);
+    background(0);
+    fill(255);
+    textSize(32);
+    textAlign(CENTER);
+    rectMode(CENTER);
+    text("GAME OVER", width / 2, height / 3);
+    rect(width / 2, 2 * height/3 - 10, 200, 100);
+    fill(0);
+    text("Play Again?", width/2, 2 *height / 3);
+    fill(255);
+    
+  } else {
+    if (start) {
+      if (!inBattle) {
+        cave.display();    
+        xNew = cave.px;
+        yNew = cave.py;
+        if (xNew == cave.bx && yNew == cave.by) {
+          scene = new Battle(0);
+          inBattle = true;
+          hasStepped = false;
+        }
+        if (xNew == cave.lx + 4  && yNew == cave.ly +4  && xNew == cave.lx - 4 && yNew == cave.ly - 4 && cave.end) {
+          scene = new Battle(1);
+          inBattle = true;
+          hasStepped = false;
+        }
+        if (Math.pow(xNew - xOld, 2) + Math.pow(yNew - yOld, 2) >= 13) {//2nd part of inequality is bound to change when I figure out the size of the player sprite
+          stepsTaken++;
+          hasStepped = true;
+          xOld = xNew;
+          yOld = yNew;
+        }
+      } else if (inBattle) {
+        scene.moveBar();
+        scene.display();
+      }
+      if (hasStepped && (int)(Math.random() * 100) == 0) {
+        scene = new Battle();
         inBattle = true;
         hasStepped = false;
       }
-      if (xNew == cave.lx + 4  && yNew == cave.ly +4  && xNew == cave.lx - 4 && yNew == cave.ly - 4 && cave.end) {
-        scene = new Battle(1);
-        inBattle = true;
-        hasStepped = false;
+      if (inBattle) {
+        scene.moveBar();
+        scene.display();
       }
-      if (Math.pow(xNew - xOld, 2) + Math.pow(yNew - yOld, 2) >= 13) {//2nd part of inequality is bound to change when I figure out the size of the player sprite
-        stepsTaken++;
-        hasStepped = true;
-        xOld = xNew;
-        yOld = yNew;
-      }
-    } else if (inBattle) {
-      scene.moveBar();
-      scene.display();
-    }
-    if (hasStepped && (int)(Math.random() * 100) == 0) {
-      scene = new Battle();
-      inBattle = true;
-      hasStepped = false;
-    }
-    if (inBattle) {
-      scene.moveBar();
-      scene.display();
     }
   }
 }
@@ -88,8 +107,11 @@ void keyPressed() {
   }
 }
 
-void mouseClicked(){
-  if(mouseX >= 250 && mouseX <= 450 && mouseY >=height/2 && mouseY<= height/2 + 70 && !start){
+void mouseClicked() {
+  if (mouseX > width / 2 - 100 && mouseX < width / 2 + 100 && mouseY > height / 4 - 60 && mouseY < height / 2 + 40 && !start) {
     start = true;
+  }
+  if(gameOver && mouseX > width / 2 - 100 && mouseX < width / 2 + 100 && mouseY > 2 * height / 3 - 60 && mouseY < 2 * height / 3 + 40){
+    setup();
   }
 }
