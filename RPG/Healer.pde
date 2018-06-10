@@ -6,7 +6,7 @@ class Healer extends Classes {
     cooldown = 0;
     isDead = false;
     myTurn = false;
-    name = "Cyril";
+    name = "Edward";
     x = width / 4;
     y = 3 * height / 4.0;
   }

@@ -168,11 +168,11 @@ class Battle {
     textSize(height / 30);
     text("Attack", 20, 4 * height/ 5 + 5 * height / 120);
     if (w.myTurn) {
-      text("Cleave" + "    Cooldown:" + w.cooldown, 20, 4 * height/ 5 + 12 * height / 120);
+      text("Cleave" + "    Cooldown: " + (int)w.cooldown, 20, 4 * height/ 5 + 12 * height / 120);
     } else if (m.myTurn) {
-      text("Fireball" + "    Cooldown:" + m.cooldown, 20, 4 * height/ 5 + 12 * height / 120);
+      text("Fireball" + "    Cooldown: " + (int)m.cooldown, 20, 4 * height/ 5 + 12 * height / 120);
     } else if (h.myTurn) {
-      text("Heal" + "    Cooldown:" + h.cooldown, 20, 4 * height/ 5 + 12 * height / 120);
+      text("Heal" + "    Cooldown: " + (int)h.cooldown, 20, 4 * height/ 5 + 12 * height / 120);
     }
     text("Run Away", 20, 4 * height/ 5 + 19 * height / 120);
     if (w.myTurn && !w.isDead) {
@@ -181,9 +181,11 @@ class Battle {
       fill(255);
     }
     if (w.hp <= 0) {
-      text(w.name + "          " + 0, 15 * width / 24, 4 * height/ 5 + 5 * height / 120);
+      text(w.name, 15 * width / 24, 4 * height/ 5 + 5 * height / 120);
+      text(0, width - width/ 6, 4 * height/ 5 + 5 * height / 120);
     } else if (w.hp > 0) {
-      text(w.name + "          " + (int)w.hp, 15 * width / 24, 4 * height/ 5 + 5 * height / 120);
+      text(w.name, 15 * width / 24, 4 * height/ 5 + 5 * height / 120);
+      text((int)w.hp, width - width/ 6, 4 * height/ 5 + 5 * height / 120);
     }
     if (m.myTurn && !m.isDead) {
       fill(255, 255, 0);
@@ -191,9 +193,11 @@ class Battle {
       fill(255);
     }
     if (m.hp <= 0) {
-      text(m.name + "          " + 0, 15 * width / 24, 4 * height/ 5 + 12 * height / 120);
+      text(m.name, 15 * width / 24, 4 * height/ 5 + 12 * height / 120);
+      text(0, width - width/ 6, 4 * height/ 5 + 12 * height / 120);
     } else if (w.hp > 0) {
-      text(m.name + "          " + (int)m.hp, 15 * width / 24, 4 * height/ 5 + 12 * height / 120);
+      text(m.name, 15 * width / 24, 4 * height/ 5 + 12 * height / 120);
+      text((int)m.hp, width - width/ 6, 4 * height/ 5 + 12 * height / 120);
     }
     if (h.myTurn && !h.isDead) {
       fill(255, 255, 0);
@@ -201,9 +205,11 @@ class Battle {
       fill(255);
     }
     if (h.hp <= 0) {
-      text(h.name + "          " + 0, 15 * width / 24, 4 * height/ 5 + 19 * height / 120);
+      text(h.name, 15 * width / 24, 4 * height/ 5 + 19 * height / 120);
+      text(0, width - width/ 6, 4 * height/ 5 + 19 * height / 120);
     } else if (h.hp > 0) {
-      text(h.name + "          " + (int)h.hp, 15 * width / 24, 4 * height/ 5 + 19 * height / 120);
+      text(h.name, 15 * width / 24, 4 * height/ 5 + 19 * height / 120);
+      text((int)h.hp, width - width/ 6, 4 * height/ 5 + 19 * height / 120);
     }
   }
   void buttons() {
