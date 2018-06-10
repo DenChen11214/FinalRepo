@@ -129,6 +129,8 @@ void mouseClicked() {
     }
     
     if ((mouseX > (20))&& (mouseX < (20 + scene.textWR)) && (mouseY > 4 * height/ 5 + 19 * height / 120 - scene.textH) && (mouseY < 4 * height/ 5 + 19 * height / 120)) {
+      scene.isSpecial =false;
+      scene.isAttacking =false;
       if ((int)(Math.random() * 3) == 1) {
         inBattle = false;
       } else {
