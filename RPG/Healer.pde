@@ -1,7 +1,7 @@
 class Healer extends Classes {
   Healer() {
-    atk = 25;
-    hp = 250;
+    atk = 50;
+    hp = 350;
     maxHp = 250;
     cooldown = 0;
     isDead = false;

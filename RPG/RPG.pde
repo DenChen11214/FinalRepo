@@ -1,4 +1,4 @@
-//<>// //<>//
+import java.util.*; //<>//
 Map cave;
 Battle scene;
 float numBattles;
@@ -7,11 +7,12 @@ float xOld, xNew, yOld, yNew, dis;
 float stepsTaken;
 boolean hasStepped;
 boolean start;
+boolean gameOver;
 Healer h;
 Mage m;
 Warrior w;
 void setup() {
-  size(720, 720);
+  size(720, 690);
   cave = new Map();
   h = new Healer();
   m = new Mage();
@@ -21,6 +22,7 @@ void setup() {
   System.out.println(yOld);
   System.out.println(xOld);
   start = false;
+  gameOver = false;
   background(0);
   textSize(32);
   text("BUDGETED BOOTLEGGED FINAL FANTASY", 50, height/2-100);
@@ -29,7 +31,6 @@ void setup() {
   fill(0);
   textSize(32);
   text("Start",width/2-45,height/2 + 50);
-  
 }
 
 void draw() {
@@ -39,7 +40,7 @@ void draw() {
       xNew = cave.px;
       yNew = cave.py;
       if (xNew == cave.bx && yNew == cave.by) {
-        scene = new Battle(1);
+        scene = new Battle(0);
         inBattle = true;
         hasStepped = false;
       }
@@ -79,5 +80,11 @@ void keyPressed() {
     if (keyCode == 'D' || keyCode == 'd') {
       cave.update(1, 0);
     }
+  }
+}
+
+void mouseClicked(){
+  if(mouseX >= 250 && mouseX <= 450 && mouseY >=height/2 && mouseY<= height/2 + 70 && !start){
+    start = true;
   }
 }

@@ -1,7 +1,7 @@
 class Mage extends Classes {
   Mage() {
-    atk = 75;
-    hp = 200;
+    atk = 100;
+    hp = 300;
     maxHp = 200;
     cooldown = 0;
     isDead = false;
@@ -21,7 +21,7 @@ class Mage extends Classes {
   void fireball(Monsters[] monsters) {
     for (int i = 0; i< monsters.length; i++) {
       if (monsters[i] != null) {
-        monsters[i].hp -= atk;
+        monsters[i].hp -= 2 * atk;
       }
     }
     cooldown = 3;

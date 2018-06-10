@@ -1,7 +1,7 @@
 class Warrior extends Classes {
   Warrior() {
-    atk = 50;
-    hp = 300;
+    atk = 75;
+    hp = 400;
     maxHp = 300;
     cooldown = 0;
     isDead = false;

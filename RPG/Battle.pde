@@ -6,7 +6,7 @@ class Battle {
   FinalBoss fBoss;
   MiniBoss mBoss;
   Classes[] heroes; 
-  PImage background,flan,goblin,ogre,miniboss,finalboss;
+  PImage background;
   float numMonsters;
   boolean isAttacking = false;
   boolean isSpecial;
@@ -22,14 +22,14 @@ class Battle {
     heroes[1] = h;
     heroes[2] = m;
     if (numMonsters ==1 ) {
-      g = new Goblin(200, 40, width - width/4, height/2);
+      g = new Goblin(200, 40, width - width/4, height/2+50);
     } else if (numMonsters ==2 ) {
-      s = new Slime(300, 40, width - width/4, height/ 3);
+      s = new Slime(300, 40, width - width/4, height/ 3 + 50);
       o = new Ogre(500, 60, width - width/4, 2 * height/3);
     } else {
-      g = new Goblin(200, 40, width - width/4, height/4);
+      g = new Goblin(200, 40, width - width/4, height/4 + 50);
       s = new Slime(300, 40, width - width/4, height/2);
-      o = new Ogre(500, 60, width - width/4, 3 * height/4);
+      o = new Ogre(500, 60, width - width/4, 3 * height/4+ 75);
     }
     w.setTurn(true);
     h.setTurn(false);
@@ -53,12 +53,12 @@ class Battle {
     if (numMonsters ==1 ) {
       g = new Goblin(400, 70, width - width/4, height/2);
     } else if (numMonsters ==2 ) {
-      s = new Slime(500, 60, width - width/4, height/ 3);
-      o = new Ogre(600, 50, width - width/4, 2 * height/3);
+      s = new Slime(500, 60, width - width/4, height/ 3 + 50);
+      o = new Ogre(600, 50, width - width/4, 2 * height/3 - 50);
     } else {
-      g = new Goblin(400, 70, width - width/4, height/4);
+      g = new Goblin(400, 70, width - width/4, height/4 + 50);
       s = new Slime(500, 60, width - width/4, height/2);
-      o = new Ogre(600, 50, width - width/4, 3 * height/4);
+      o = new Ogre(600, 50, width - width/4, 3 * height/4 - 50);
     }
     w.setTurn(true);
     h.setTurn(false);
@@ -72,7 +72,7 @@ class Battle {
     background.resize(720,720);
     isBossFight = true;
     if (mode == 0) {
-      mBoss = new MiniBoss(700, 120, width - width/4, height/2);
+      mBoss = new MiniBoss(600, 120, width - width/4, height/2);
       h.display();
       m.display();
       w.display();
@@ -381,22 +381,22 @@ class Battle {
 
   Monsters chooseTarget() {
     if (g != null) {
-      if (mouseX > g.x - 25 && mouseX < g.x + 25 && mouseY > g.y - 25 && mouseY < g.y + 25 && mousePressed) {
+      if (mouseX > g.x - 30 && mouseX < g.x + 50 && mouseY > g.y - 30 && mouseY < g.y + 50 && mousePressed) {
         return g;
       }
     }
     if (s != null) {
-      if (mouseX > s.x - 25 && mouseX < s.x + 25 && mouseY > s.y - 25 && mouseY < s.y + 25 && mousePressed) {
+      if (mouseX > s.x - 30 && mouseX < s.x + 50 && mouseY > s.y - 30 && mouseY < s.y + 50 && mousePressed) {
         return s;
       }
     }
     if (o != null) {
-      if (mouseX > o.x - 25 && mouseX < o.x + 25 && mouseY > o.y - 25 && mouseY < o.y + 25 && mousePressed) {
+      if (mouseX > o.x - 30 && mouseX < o.x + 50 && mouseY > o.y - 30 && mouseY < o.y + 50 && mousePressed) {
         return o;
       }
     }
     if (mBoss != null) {
-      if (mouseX > mBoss.x - 25 && mouseX < mBoss.x + 25 && mouseY > mBoss.y - 25 && mouseY < mBoss.y + 25 && mousePressed) {
+      if (mouseX > mBoss.x - 50 && mouseX < mBoss.x + 100 && mouseY > mBoss.y - 50 && mouseY < mBoss.y + 100 && mousePressed) {
         return mBoss;
       }
     }
