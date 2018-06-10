@@ -6,7 +6,7 @@ class FinalBoss extends Monsters{
     y = y_;
   }
   void attack(Classes character) {// do the same thing you did in Miniboss here
-    character.hp -= 2 * atk;
+    character.hp -=  atk;
   }
   void hitAll(Classes[] players){
     for(int i =0;i< players.length;i++){

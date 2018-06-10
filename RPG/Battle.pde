@@ -6,7 +6,7 @@ class Battle {
   FinalBoss fBoss;
   MiniBoss mBoss;
   Classes[] heroes; 
-  PImage background;
+  PImage background,flan,goblin,ogre,miniboss,finalboss;
   float numMonsters;
   boolean isAttacking = false;
   boolean isSpecial;
@@ -22,14 +22,14 @@ class Battle {
     heroes[1] = h;
     heroes[2] = m;
     if (numMonsters ==1 ) {
-      g = new Goblin(400, 70, width - width/4, height/2);
+      g = new Goblin(200, 40, width - width/4, height/2);
     } else if (numMonsters ==2 ) {
-      s = new Slime(500, 60, width - width/4, height/ 3);
-      o = new Ogre(600, 50, width - width/4, 2 * height/3);
+      s = new Slime(300, 40, width - width/4, height/ 3);
+      o = new Ogre(500, 60, width - width/4, 2 * height/3);
     } else {
-      g = new Goblin(400, 70, width - width/4, height/4);
-      s = new Slime(500, 60, width - width/4, height/2);
-      o = new Ogre(600, 50, width - width/4, 3 * height/4);
+      g = new Goblin(200, 40, width - width/4, height/4);
+      s = new Slime(300, 40, width - width/4, height/2);
+      o = new Ogre(500, 60, width - width/4, 3 * height/4);
     }
     w.setTurn(true);
     h.setTurn(false);
@@ -72,7 +72,7 @@ class Battle {
     background.resize(720,720);
     isBossFight = true;
     if (mode == 0) {
-      mBoss = new MiniBoss(1000, 120, width - width/4, height/2);
+      mBoss = new MiniBoss(700, 120, width - width/4, height/2);
       h.display();
       m.display();
       w.display();
@@ -82,7 +82,7 @@ class Battle {
       heroes[2] = m;
     }
     if (mode == 1) {
-      fBoss = new FinalBoss(1500, 160, width - width/4, height/2);
+      fBoss = new FinalBoss(900, 160, width - width/4, height/2);
       h.display();
       m.display();
       w.display();
