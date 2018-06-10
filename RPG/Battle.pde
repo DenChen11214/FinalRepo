@@ -72,7 +72,7 @@ class Battle {
     background.resize(720,720);
     isBossFight = true;
     if (mode == 0) {
-      mBoss = new MiniBoss(600, 120, width - width/4, height/2);
+      mBoss = new MiniBoss(900, 150, width - width/4, height/2);
       h.display();
       m.display();
       w.display();
@@ -82,7 +82,7 @@ class Battle {
       heroes[2] = m;
     }
     if (mode == 1) {
-      fBoss = new FinalBoss(900, 160, width - width/4, height/2);
+      fBoss = new FinalBoss(1500, 200, width - width/4, height/2);
       h.display();
       m.display();
       w.display();
@@ -105,6 +105,8 @@ class Battle {
       if (mBoss != null) {
         if (mBoss.hp <= 0) {
           inBattle = false;
+          cave.bx = -1;
+      cave.by = -1;  
         } else {
           mBoss.display();
         }
