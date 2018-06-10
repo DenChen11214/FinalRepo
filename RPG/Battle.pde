@@ -12,6 +12,8 @@ class Battle {
   boolean isSpecial;
   boolean isBossFight;
   LinkedList<Classes> turnSystem = new LinkedList();
+  boolean runAwayClicked = false;
+  float textWR, textH, textW,textWM;
   Battle() {
     background = loadImage("battleground.png");
     background.resize(720, 720);
@@ -29,7 +31,7 @@ class Battle {
     } else {
       g = new Goblin(350, 70, width - width/4, height/4 + 50);
       s = new Slime(400, 50, width - width/4, height/2 - 5);
-      o = new Ogre(500, 40, width - width/4,  height/2 + 115);
+      o = new Ogre(500, 40, width - width/4, height/2 + 115);
     }
     w.setTurn(true);
     h.setTurn(false);
@@ -225,21 +227,16 @@ class Battle {
     }
   }
   void buttons() {
-    float textW = textWidth("Attack");
-    float textWM = textWidth("Fireball");
-    float textWR = textWidth("Run Away");
-    float textH = textAscent() + textDescent();
+    textW = textWidth("Attack");
+    textWM = textWidth("Fireball");
+    textWR = textWidth("Run Away");
+    textH = textAscent() + textDescent();
     if (w.myTurn) {
       if (w.isDead) {
         turnSystem.getFirst().setTurn(false);
         turnSystem.addLast(turnSystem.removeFirst());
         turnSystem.getFirst().setTurn(true);
       } else {
-        if ((mouseX > (20))&& (mouseX < (20 + textW)) && mousePressed && (mouseY > 4 * height/ 5 + 5 * height / 120 - textH) && (mouseY < 4 * height/ 5 + 5 * height / 120)) {
-          isAttacking = true;
-        } else if ((mouseX > (20))&& (mouseX < (20 + textWM)) && mousePressed && (mouseY > 4 * height/ 5 + 12 * height / 120 - textH) && (mouseY < 4 * height/ 5 + 12 * height / 120)) {
-          isSpecial = true;
-        }
         if (isAttacking) {
           if (chooseTarget() != null) {
             w.attack(chooseTarget());
@@ -266,11 +263,6 @@ class Battle {
         turnSystem.addLast(turnSystem.removeFirst());
         turnSystem.getFirst().setTurn(true);
       } else {
-        if ((mouseX > (20))&& (mouseX < (20 + textW)) && mousePressed && (mouseY > 4 * height/ 5 + 5 * height / 120 - textH) && (mouseY < 4 * height/ 5 + 5 * height / 120)) {
-          isAttacking = true;
-        } else if ((mouseX > (20))&& (mouseX < (20 + textWM)) && mousePressed && (mouseY > 4 * height/ 5 + 12 * height / 120 - textH) && (mouseY < 4 * height/ 5 + 12 * height / 120)) {
-          isSpecial = true;
-        }
         if (isAttacking) {
           if (chooseTarget() != null) {
             m.attack(chooseTarget());
@@ -318,11 +310,6 @@ class Battle {
         h.dead();
         m.dead();
       } else {
-        if ((mouseX > (20))&& (mouseX < (20 + textW)) && mousePressed && (mouseY > 4 * height/ 5 + 5 * height / 120 - textH) && (mouseY < 4 * height/ 5 + 5 * height / 120)) {
-          isAttacking = true;
-        } else if ((mouseX > (20))&& (mouseX < (20 + textWM)) && mousePressed && (mouseY > 4 * height/ 5 + 12 * height / 120 - textH) && (mouseY < 4 * height/ 5 + 12 * height / 120)) {
-          isSpecial = true;
-        }
         if (isAttacking) {
           if (chooseTarget() != null) {
             h.attack(chooseTarget());
@@ -392,10 +379,8 @@ class Battle {
         }
       }
     }
-    if ((mouseX > (20))&& (mouseX < (20 + textWR)) && mousePressed && (mouseY > 4 * height/ 5 + 19 * height / 120 - textH) && (mouseY < 4 * height/ 5 + 19 * height / 120)) {
-      inBattle = false;
-    }
   }
+
 
   Monsters chooseTarget() {
     if (g != null) {
@@ -445,15 +430,15 @@ class Battle {
     return mobs;
   }
   Classes healTarget() {
-    if (mouseX > h.x - 25 && mouseX < h.x + 25 && mouseY > h.y - 25 && mouseY < h.y + 25 && mousePressed) {
+    if (mouseX > h.x && mouseX < h.x + 75 && mouseY > h.y && mouseY < h.y + 75 && mousePressed) {
       if (h.hp > 0) {
         return h;
       }
-    } else if (mouseX > m.x - 25 && mouseX < m.x + 25 && mouseY > m.y - 25 && mouseY < m.y + 25 && mousePressed) {
+    } else if (mouseX > m.x && mouseX < m.x + 75 && mouseY > m.y && mouseY < m.y + 75 && mousePressed) {
       if (m.hp > 0) {
         return m;
       }
-    } else if (mouseX > w.x - 25 && mouseX < w.x + 25 && mouseY > w.y - 25 && mouseY < w.y + 25 && mousePressed) {
+    } else if (mouseX > w.x && mouseX < w.x + 75 && mouseY > w.y && mouseY < w.y + 75 && mousePressed) {
       if (w.hp > 0) {
         return w;
       }

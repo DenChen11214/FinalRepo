@@ -118,4 +118,22 @@ void mouseClicked() {
   if (gameOver && mouseX > width / 2 - 100 && mouseX < width / 2 + 100 && mouseY > 2 * height / 3 - 60 && mouseY < 2 * height / 3 + 40) {
     setup();
   }
+  if (inBattle) {
+    if ((mouseX > (20))&& (mouseX < (20 + scene.textW)) && (mouseY > 4 * height/ 5 + 5 * height / 120 - scene.textH) && (mouseY < 4 * height/ 5 + 5 * height / 120)) {
+      scene.isAttacking = true;
+      System.out.println("HI");
+    } else if ((mouseX > (20))&& (mouseX < (20 + scene.textWM)) && (mouseY > 4 * height/ 5 + 12 * height / 120 - scene.textH) && (mouseY < 4 * height/ 5 + 12 * height / 120)) {
+      scene.isSpecial = true;
+    }
+    
+    if ((mouseX > (20))&& (mouseX < (20 + scene.textWR)) && (mouseY > 4 * height/ 5 + 19 * height / 120 - scene.textH) && (mouseY < 4 * height/ 5 + 19 * height / 120)) {
+      if ((int)(Math.random() * 2) == 1) {
+        inBattle = false;
+      } else {
+        scene.turnSystem.getFirst().setTurn(false);
+        scene.turnSystem.addLast(scene.turnSystem.removeFirst());
+        scene.turnSystem.getFirst().setTurn(true);
+      }
+    }
+  }
 }
