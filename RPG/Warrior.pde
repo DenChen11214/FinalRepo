@@ -1,4 +1,5 @@
 class Warrior extends Classes {
+  PImage kain;
   Warrior() {
     atk = 75;
     hp = 400;
@@ -9,6 +10,8 @@ class Warrior extends Classes {
     name = "Kain";
     x = width / 4.0;
     y = height / 4.0;
+    kain = loadImage("kain_sprite.png");
+    kain.resize(50, 50);
   }
   void attack(Monsters monster) {
     //should trigger the attack animation
@@ -29,8 +32,7 @@ class Warrior extends Classes {
   }
   void display() {
     //testing
-    fill(255);
-    ellipse(x,y,50,50);
+    image(kain,x,y);
     fill(0);
     text("" + hp,x,y);
   }

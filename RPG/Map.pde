@@ -38,7 +38,7 @@ class Map {
           py = c;
         }
         if (base[r][c] =='O') {
-          bx =r;
+          bx = r;
           by = c;
         }
         if (last[r][c] == 'O') {

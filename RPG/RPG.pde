@@ -44,6 +44,11 @@ void draw() {
         inBattle = true;
         hasStepped = false;
       }
+      if (xNew == cave.lx + 4  && yNew == cave.ly +4  && xNew == cave.lx - 4 && yNew == cave.ly - 4 && cave.end) {
+        scene = new Battle(1);
+        inBattle = true;
+        hasStepped = false;
+      }
       if (Math.pow(xNew - xOld, 2) + Math.pow(yNew - yOld, 2) >= 13) {//2nd part of inequality is bound to change when I figure out the size of the player sprite
         stepsTaken++;
         hasStepped = true;
