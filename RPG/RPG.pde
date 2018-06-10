@@ -1,4 +1,4 @@
-import java.util.*; //<>// //<>//
+import java.util.*; //<>// //<>// //<>//
 Map cave;
 Battle scene;
 float numBattles;
@@ -50,7 +50,6 @@ void draw() {
     fill(0);
     text("Play Again?", width/2, 2 *height / 3);
     fill(255);
-    
   } else {
     if (start) {
       if (!inBattle) {
@@ -67,7 +66,7 @@ void draw() {
           inBattle = true;
           hasStepped = false;
         }
-        if (Math.pow(xNew - xOld, 2) + Math.pow(yNew - yOld, 2) >= 13) {//2nd part of inequality is bound to change when I figure out the size of the player sprite
+        if (Math.pow(xNew - xOld, 2) + Math.pow(yNew - yOld, 2) >= 13) {
           stepsTaken++;
           hasStepped = true;
           xOld = xNew;
@@ -78,7 +77,11 @@ void draw() {
         scene.display();
       }
       if (hasStepped && (int)(Math.random() * 100) == 0) {
-        scene = new Battle();
+        if (numBattles == 0) {
+          scene = new Battle(true);
+        } else {
+          scene = new Battle();
+        }
         inBattle = true;
         hasStepped = false;
       }
@@ -111,7 +114,7 @@ void mouseClicked() {
   if (mouseX > width / 2 - 100 && mouseX < width / 2 + 100 && mouseY > height / 4 - 60 && mouseY < height / 2 + 40 && !start) {
     start = true;
   }
-  if(gameOver && mouseX > width / 2 - 100 && mouseX < width / 2 + 100 && mouseY > 2 * height / 3 - 60 && mouseY < 2 * height / 3 + 40){
+  if (gameOver && mouseX > width / 2 - 100 && mouseX < width / 2 + 100 && mouseY > 2 * height / 3 - 60 && mouseY < 2 * height / 3 + 40) {
     setup();
   }
 }

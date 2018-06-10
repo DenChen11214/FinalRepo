@@ -38,11 +38,10 @@ class Battle {
     turnSystem.add(m);
     turnSystem.add(h);
   }
-  Battle(float monsters) {
+  Battle(boolean firstBattle) {
     background = loadImage("battleground.png");
     background.resize(720,720);
     isBossFight = false;
-    numMonsters = monsters;
     h.display();
     m.display();
     w.display();
@@ -50,16 +49,8 @@ class Battle {
     heroes[0] = w;
     heroes[1] = h;
     heroes[2] = m;
-    if (numMonsters ==1 ) {
-      g = new Goblin(400, 70, width - width/4, height/2);
-    } else if (numMonsters ==2 ) {
-      s = new Slime(500, 60, width - width/4, height/ 3 + 50);
-      o = new Ogre(600, 50, width - width/4, 2 * height/3 - 50);
-    } else {
-      g = new Goblin(400, 70, width - width/4, height/4 + 50);
-      s = new Slime(500, 60, width - width/4, height/2);
-      o = new Ogre(600, 50, width - width/4, 3 * height/4 - 50);
-    }
+    numMonsters = 1;
+    g = new Goblin(400, 70, width - width/4, height/2);
     w.setTurn(true);
     h.setTurn(false);
     m.setTurn(false);
