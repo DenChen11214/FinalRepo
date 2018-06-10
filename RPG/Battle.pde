@@ -128,7 +128,7 @@ class Battle {
           float hp = m.maxHp - m.hp;
           m.hp += hp;
         } else {
-          m.hp += 100;
+          m.hp += 50;
         }
       }
       if (numMonsters ==1 ) {
@@ -399,22 +399,22 @@ class Battle {
 
   Monsters chooseTarget() {
     if (g != null) {
-      if (mouseX > g.x - 30 && mouseX < g.x + 50 && mouseY > g.y - 30 && mouseY < g.y + 50 && mousePressed) {
+      if (mouseX > g.x && mouseX < g.x + 75 && mouseY > g.y && mouseY < g.y + 75 && mousePressed) {
         return g;
       }
     }
     if (s != null) {
-      if (mouseX > s.x - 30 && mouseX < s.x + 50 && mouseY > s.y - 30 && mouseY < s.y + 50 && mousePressed) {
+      if (mouseX > s.x && mouseX < s.x + 75 && mouseY > s.y && mouseY < s.y + 75 && mousePressed) {
         return s;
       }
     }
     if (o != null) {
-      if (mouseX > o.x - 30 && mouseX < o.x + 50 && mouseY > o.y - 30 && mouseY < o.y + 50 && mousePressed) {
+      if (mouseX > o.x && mouseX < o.x + 75 && mouseY > o.y && mouseY < o.y + 75 && mousePressed) {
         return o;
       }
     }
     if (mBoss != null) {
-      if (mouseX > mBoss.x - 50 && mouseX < mBoss.x + 100 && mouseY > mBoss.y - 50 && mouseY < mBoss.y + 100 && mousePressed) {
+      if (mouseX > mBoss.x && mouseX < mBoss.x + 100 && mouseY > mBoss.y && mouseY < mBoss.y + 100 && mousePressed) {
         return mBoss;
       }
     }
