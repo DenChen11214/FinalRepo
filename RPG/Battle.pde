@@ -14,7 +14,7 @@ class Battle {
   LinkedList<Classes> turnSystem = new LinkedList();
   Battle() {
     background = loadImage("battleground.png");
-    background.resize(720,720);
+    background.resize(720, 720);
     isBossFight = false;
     numMonsters = (int)(Math.random() * 3) + 1;
     heroes= new Classes[3];
@@ -22,14 +22,14 @@ class Battle {
     heroes[1] = h;
     heroes[2] = m;
     if (numMonsters ==1 ) {
-      g = new Goblin(200, 40, width - width/4, height/2+50);
+      g = new Goblin(350, 70, width - width/4, height/2);
     } else if (numMonsters ==2 ) {
-      s = new Slime(300, 40, width - width/4, height/ 3 + 50);
-      o = new Ogre(500, 60, width - width/4, 2 * height/3);
+      s = new Slime(400, 50, width - width/4, height/ 3 + 50);
+      o = new Ogre(500, 40, width - width/4, 2 * height/3);
     } else {
-      g = new Goblin(200, 40, width - width/4, height/4 + 50);
-      s = new Slime(300, 40, width - width/4, height/2);
-      o = new Ogre(500, 60, width - width/4, 3 * height/4+ 75);
+      g = new Goblin(350, 70, width - width/4, height/4 + 50);
+      s = new Slime(400, 50, width - width/4, height/2 - 5);
+      o = new Ogre(500, 40, width - width/4,  height/2 + 115);
     }
     w.setTurn(true);
     h.setTurn(false);
@@ -40,7 +40,7 @@ class Battle {
   }
   Battle(boolean firstBattle) {
     background = loadImage("battleground.png");
-    background.resize(720,720);
+    background.resize(720, 720);
     isBossFight = false;
     h.display();
     m.display();
@@ -50,7 +50,7 @@ class Battle {
     heroes[1] = h;
     heroes[2] = m;
     numMonsters = 1;
-    g = new Goblin(400, 70, width - width/4, height/2);
+    g = new Goblin(350, 70, width - width/4, height/2);
     w.setTurn(true);
     h.setTurn(false);
     m.setTurn(false);
@@ -60,10 +60,10 @@ class Battle {
   }
   Battle(int mode) {
     background = loadImage("battleground.png");
-    background.resize(720,720);
+    background.resize(720, 720);
     isBossFight = true;
     if (mode == 0) {
-      mBoss = new MiniBoss(900, 150, width - width/4, height/2);
+      mBoss = new MiniBoss(1000, 150, width - width/4, height/2);
       h.display();
       m.display();
       w.display();
@@ -91,13 +91,13 @@ class Battle {
   }
 
   void display() {
-    image(background,0,0);
+    image(background, 0, 0);
     if (isBossFight) {
       if (mBoss != null) {
         if (mBoss.hp <= 0) {
           inBattle = false;
           cave.bx = -1;
-      cave.by = -1;  
+          cave.by = -1;
         } else {
           mBoss.display();
         }
@@ -112,6 +112,24 @@ class Battle {
     } else {
       if ((g == null || g.hp <= 0) && (o == null || o.hp <= 0) && (s == null || s.hp <= 0)) {
         inBattle = false;
+        if (h.hp + 50 > h.maxHp) {
+          float hp = h.maxHp - h.hp;
+          h.hp += hp;
+        } else {
+          h.hp += 50;
+        }
+        if (w.hp + 50 > w.maxHp) {
+          float hp = w.maxHp - w.hp;
+          w.hp += hp;
+        } else {
+          w.hp += 50;
+        }
+        if (m.hp + 50 > m.maxHp) {
+          float hp = m.maxHp - m.hp;
+          m.hp += hp;
+        } else {
+          m.hp += 100;
+        }
       }
       if (numMonsters ==1 ) {
         if (!g.dead()) {        

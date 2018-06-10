@@ -19,7 +19,6 @@ class Slime extends Monsters{
   }
   void display() {
     //testing
-    fill(255);
     image(slime,x,y);
     fill(0);
     text("" + hp,x,y);

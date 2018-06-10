@@ -76,9 +76,10 @@ void draw() {
         scene.moveBar();
         scene.display();
       }
-      if (hasStepped && (int)(Math.random() * 100) == 0) {
+      if (hasStepped && (int)(Math.random() * 50) == 0) {
         if (numBattles == 0) {
           scene = new Battle(true);
+          numBattles++;
         } else {
           scene = new Battle();
         }

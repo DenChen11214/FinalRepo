@@ -21,6 +21,7 @@ class Goblin extends Monsters{
   void display() {
     //testing
     image(goblin,x,y);
+    fill(0);
     text("" + hp,x,y);  
   }  
 }

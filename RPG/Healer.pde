@@ -1,14 +1,14 @@
 class Healer extends Classes {
   Healer() {
     atk = 50;
-    hp = 350;
-    maxHp = 350;
+    hp = 450;
+    maxHp = 450;
     cooldown = 0;
     isDead = false;
     myTurn = false;
     name = "Edward";
     x = width / 4;
-    y = 3 * height / 4.0;
+    y = height / 2 + 115;
   }
   void attack(Monsters monster) {
     //should trigger the attack animation
@@ -32,6 +32,7 @@ class Healer extends Classes {
   void dead() {
     if(hp <= 0){
       isDead =true;
+      hp = 0;
     }
   }
   

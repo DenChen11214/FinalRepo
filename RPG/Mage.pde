@@ -1,14 +1,14 @@
 class Mage extends Classes {
   Mage() {
     atk = 100;
-    hp = 300;
-    maxHp = 300;
+    hp = 400;
+    maxHp = 400;
     cooldown = 0;
     isDead = false;
     myTurn = false;
     name = "Palom";
     x = width / 4.0;
-    y = height / 2.0;
+    y = height / 2.0 - 5;
   }
   void attack(Monsters monster) {
     //should trigger the attack animation
@@ -21,7 +21,7 @@ class Mage extends Classes {
   void fireball(Monsters[] monsters) {
     for (int i = 0; i< monsters.length; i++) {
       if (monsters[i] != null) {
-        monsters[i].hp -= 2 * atk;
+        monsters[i].hp -= atk;
       }
     }
     cooldown = 3;
@@ -30,6 +30,7 @@ class Mage extends Classes {
   void dead() {
     if (hp <= 0) {
       isDead = true;
+      hp = 0;
     }
   }
 
