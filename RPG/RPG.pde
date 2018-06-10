@@ -1,4 +1,4 @@
-import java.util.*; //<>// //<>// //<>//
+import java.util.*; //<>// //<>// //<>// //<>//
 Map cave;
 Battle scene;
 float numBattles;
@@ -45,10 +45,10 @@ void draw() {
     textSize(32);
     textAlign(CENTER);
     rectMode(CENTER);
-    text("GAME OVER", width / 2, height / 3);
+    text("The Party Has Fallen", width / 2, height / 3);
     rect(width / 2, 2 * height/3 - 10, 200, 100);
     fill(0);
-    text("Play Again?", width/2, 2 *height / 3);
+    text("Try Again?", width/2, 2 *height / 3);
     fill(255);
   } else {
     if (start) {
