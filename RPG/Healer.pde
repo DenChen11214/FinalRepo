@@ -1,3 +1,4 @@
+
 class Healer extends Classes {
   Healer() {
     atk = 50;

@@ -1,3 +1,4 @@
+
 class Mage extends Classes {
   Mage() {
     atk = 100;

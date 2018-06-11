@@ -12,7 +12,6 @@ class Map {
   Map() {
     lx = 10;
     ly = 2;
-    end = true;
     String[] lines = loadStrings("Room.txt");  
     int row = lines.length;
     int col = lines[0].length();
@@ -26,7 +25,7 @@ class Map {
     floor.resize(30, 30);
     stairs = loadImage("stairs.jpg");
     stairs.resize(30, 30);
-    boss = loadImage("Boss.png");
+    boss = loadImage("boss.jpg");
     boss.resize(30, 30);
     drag = loadImage("bahamut.jpg");
     drag.resize(120, 120);

@@ -1,3 +1,4 @@
+
 class Warrior extends Classes {
   PImage kain;
   Warrior() {

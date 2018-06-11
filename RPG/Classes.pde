@@ -1,3 +1,4 @@
+
 abstract class Classes {
   float hp, atk, cooldown,maxHp;
   boolean isDead;
@@ -11,4 +12,13 @@ abstract class Classes {
   }
   abstract void attack(Monsters monster);//triggers attack animation
   abstract void dead();//makes character lie on floor/disappear
+    protected PApplet getEnclosingPApplet() {
+    try {
+      return (PApplet) getClass().getDeclaredField("this$0").get(this);
+    }
+
+    catch (ReflectiveOperationException cause) {
+      throw new RuntimeException(cause);
+    }
+  }
 }

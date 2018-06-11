@@ -1,3 +1,4 @@
+
 class FinalBoss extends Monsters{
   FinalBoss(float health, float attack, float x_, float y_) {
     hp = health;
@@ -5,6 +6,7 @@ class FinalBoss extends Monsters{
     x = x_;
     y = y_;
   }
+
   void attack(Classes character) {// do the same thing you did in Miniboss here
     Classes[] players = {h,m,w};
     if((int)(Math.random() * 2) == 1){
@@ -29,8 +31,6 @@ class FinalBoss extends Monsters{
   }
   void display() {
     //testing
-    fill(255);
-    ellipse(x,y,50,50);
     fill(0);
     text("" + hp,x,y);
   }

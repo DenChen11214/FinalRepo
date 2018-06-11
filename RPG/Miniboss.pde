@@ -1,13 +1,13 @@
+
 class MiniBoss extends Monsters{
-  PImage behemoth;
   MiniBoss(float health, float attack, float x_, float y_) {
     hp = health;
     atk = attack;
     x = x_;
     y = y_;
-    behemoth = loadImage("Boss.png");
-    behemoth.resize(100,100);
+
   }
+
   void attack(Classes character) {//in battle, make it so that theres a half chance that it does hitAll and half chance it hits a random mob
     Classes[] players = {h,m,w};
     if((int)(Math.random() * 2) == 1){
@@ -32,7 +32,7 @@ class MiniBoss extends Monsters{
   }
   void display() {
     //testing
-    image(behemoth,x,y);
+
     fill(0);
     text("" + hp,x,y);
   }

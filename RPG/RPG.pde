@@ -1,5 +1,4 @@
 import java.util.*; //<>// //<>// //<>// //<>//
-import gifAnimation.*;
 Map cave;
 Battle scene;
 float numBattles;
