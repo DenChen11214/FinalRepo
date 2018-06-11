@@ -1,4 +1,4 @@
-import java.util.*; //<>// //<>// //<>// //<>// //<>//
+import java.util.*; //<>// //<>// //<>// //<>// //<>// //<>//
 Map cave;
 Battle scene;
 float numBattles;
@@ -127,16 +127,16 @@ void draw() {
 
 void keyPressed() {
   if (!inBattle) {
-    if (keyCode == 'W' || keyCode == 'w') {
+    if (keyCode == 'W' || keyCode == 'w' || keyCode == UP) {
       cave.update(0, -1);
     }
-    if (keyCode == 'S' || keyCode == 's') {
+    if (keyCode == 'S' || keyCode == 's' || keyCode == DOWN) {
       cave.update(0, 1);
     }
-    if (keyCode == 'A' || keyCode == 'a') {
+    if (keyCode == 'A' || keyCode == 'a'|| keyCode == LEFT) {
       cave.update(-1, 0);
     }
-    if (keyCode == 'D' || keyCode == 'd') {
+    if (keyCode == 'D' || keyCode == 'd'|| keyCode == RIGHT) {
       cave.update(1, 0);
     }
   }
