@@ -75,7 +75,7 @@ class Battle {
       heroes[2] = m;
     }
     if (mode == 1) {
-      fBoss = new FinalBoss(100, 140, width - 3 * width/4, height/2-150);
+      fBoss = new FinalBoss(1100, 140, width - 3 * width/4, height/2-150);
       h.display();
       m.display();
       w.display();

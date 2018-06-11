@@ -33,7 +33,7 @@ class MiniBoss extends Monsters {
   void display() {
     //testing
     image(a, x, y);
-    fill(0);
+    fill(255,255,0);
     text("" + hp, x, y);
   }
 }

@@ -34,6 +34,7 @@ class FinalBoss extends Monsters{
   void display() {
     //testing
     image(a,x,y);
+    fill(255,255,0);
     text("" + hp,x,y);
   }
 }
