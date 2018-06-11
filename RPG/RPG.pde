@@ -54,10 +54,7 @@ void draw() {
     textAlign(CENTER);
     rectMode(CENTER);
     text("Game Cleared!!", width / 2, height / 3);
-    rect(width / 2, 2 * height/3 - 10, 200, 100);
-    fill(0);
-    text("Play Again?", width/2, 2 *height / 3);
-    fill(255);
+    
   }
   if (gameOver) {
     delay(3000);
