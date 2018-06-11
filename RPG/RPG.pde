@@ -1,3 +1,4 @@
+ //<>//
 import java.util.*; //<>// //<>// //<>// //<>// //<>// //<>//
 Map cave;
 Battle scene;
@@ -53,6 +54,10 @@ void draw() {
     textAlign(CENTER);
     rectMode(CENTER);
     text("Game Cleared!!", width / 2, height / 3);
+    rect(width / 2, 2 * height/3 - 10, 200, 100);
+    fill(0);
+    text("Play Again?", width/2, 2 *height / 3);
+    fill(255);
   }
   if (gameOver) {
     delay(3000);
@@ -154,14 +159,13 @@ void mouseClicked() {
     setup();
     
   }
-  if (gameOver && mouseX > width / 2 - 100 && mouseX < width / 2 + 100 && mouseY > 2 * height / 3 - 60 && mouseY < 2 * height / 3 + 40) {
+  if ((gameOver || won) && mouseX > width / 2 - 100 && mouseX < width / 2 + 100 && mouseY > 2 * height / 3 - 60 && mouseY < 2 * height / 3 + 40) {
     setup();
   }
   if (inBattle) {
     if ((mouseX > (20))&& (mouseX < (20 + scene.textW)) && (mouseY > 4 * height/ 5 + 5 * height / 120 - scene.textH) && (mouseY < 4 * height/ 5 + 5 * height / 120)) {
       scene.isAttacking = true;
       scene.isSpecial = false;
-      System.out.println("HI");
     } else if ((mouseX > (20))&& (mouseX < (20 + scene.textWM)) && (mouseY > 4 * height/ 5 + 12 * height / 120 - scene.textH) && (mouseY < 4 * height/ 5 + 12 * height / 120)) {
       scene.isSpecial = true;
       scene.isAttacking = false;

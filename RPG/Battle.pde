@@ -65,7 +65,7 @@ class Battle {
     background.resize(720, 720);
     isBossFight = true;
     if (mode == 0) {
-      mBoss = new MiniBoss(800, 100, width - 3 * width/4, height/2- 100);
+      mBoss = new MiniBoss(750, 80, width - 3 * width/4, height/2- 100);
       h.display();
       m.display();
       w.display();
@@ -75,7 +75,7 @@ class Battle {
       heroes[2] = m;
     }
     if (mode == 1) {
-      fBoss = new FinalBoss(1100, 140, width - 3 * width/4, height/2-150);
+      fBoss = new FinalBoss(1000, 120, width - 3 * width/4, height/2-150);
       h.display();
       m.display();
       w.display();
