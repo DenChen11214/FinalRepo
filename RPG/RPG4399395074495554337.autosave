@@ -1,4 +1,4 @@
-import java.util.*; //<>// //<>// //<>// //<>// //<>//
+import java.util.*; //<>// //<>// //<>// //<>//
 Map cave;
 Battle scene;
 float numBattles;
@@ -40,6 +40,7 @@ void setup() {
   text("How to Play", width / 2, 3 * height / 4);
   textAlign(CORNER);
   rectMode(CORNER);
+  System.out.println(cave.lx);
 }
 
 void draw() {
@@ -150,7 +151,7 @@ void mouseClicked() {
       scene.isSpecial = true;
       scene.isAttacking = false;
     }
-    
+
     if ((mouseX > (20))&& (mouseX < (20 + scene.textWR)) && (mouseY > 4 * height/ 5 + 19 * height / 120 - scene.textH) && (mouseY < 4 * height/ 5 + 19 * height / 120)) {
       scene.isSpecial =false;
       scene.isAttacking =false;

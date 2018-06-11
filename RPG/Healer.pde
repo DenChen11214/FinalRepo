@@ -1,5 +1,6 @@
 
 class Healer extends Classes {
+  PImage Edward;
   Healer() {
     atk = 50;
     hp = 450;
@@ -8,8 +9,10 @@ class Healer extends Classes {
     isDead = false;
     myTurn = false;
     name = "Edward";
-    x = width / 4;
+    x = width - width / 4;
     y = height / 2 + 115;
+    Edward = loadImage("Edward.png");
+    Edward.resize(75,75);
   }
   void attack(Monsters monster) {
     //should trigger the attack animation
@@ -41,8 +44,7 @@ class Healer extends Classes {
   
   void display() {
     //testing
-    fill(255);
-    ellipse(x,y,50,50);
+    image(Edward,x,y);
     fill(0);
     text("" + hp,x,y);  
   }

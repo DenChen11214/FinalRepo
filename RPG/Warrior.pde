@@ -9,9 +9,9 @@ class Warrior extends Classes {
     isDead = false;
     myTurn = true;
     name = "Kain";
-    x = width / 4.0;
+    x = width - width / 4.0;
     y = height / 4.0 + 50;
-    kain = loadImage("kain_sprite.png");
+    kain = loadImage("Kain.png");
     kain.resize(75,75);
   }
   void attack(Monsters monster) {

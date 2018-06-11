@@ -24,14 +24,14 @@ class Battle {
     heroes[1] = h;
     heroes[2] = m;
     if (numMonsters ==1 ) {
-      g = new Goblin(350, 70, width - width/4, height/2);
+      g = new Goblin(350, 70, width - 3 * width/4, height/2);
     } else if (numMonsters ==2 ) {
-      s = new Slime(400, 50, width - width/4, height/ 3 + 50);
-      o = new Ogre(500, 40, width - width/4, 2 * height/3);
+      s = new Slime(400, 50, width - 3 * width/4, height/ 3 + 50);
+      o = new Ogre(500, 40, width - 3 * width/4, 2 * height/3);
     } else {
-      g = new Goblin(350, 70, width - width/4, height/4 + 50);
-      s = new Slime(400, 50, width - width/4, height/2 - 5);
-      o = new Ogre(500, 40, width - width/4, height/2 + 115);
+      g = new Goblin(350, 70, width - 3 * width/4, height/4 + 50);
+      s = new Slime(400, 50, width - 3 * width/4, height/2 - 5);
+      o = new Ogre(500, 40, width - 3 * width/4, height/2 + 115);
     }
     w.setTurn(true);
     h.setTurn(false);
@@ -52,7 +52,7 @@ class Battle {
     heroes[1] = h;
     heroes[2] = m;
     numMonsters = 1;
-    g = new Goblin(350, 70, width - width/4, height/2);
+    g = new Goblin(350, 70, width - 3* width/4, height/2);
     w.setTurn(true);
     h.setTurn(false);
     m.setTurn(false);
@@ -65,7 +65,7 @@ class Battle {
     background.resize(720, 720);
     isBossFight = true;
     if (mode == 0) {
-      mBoss = new MiniBoss(800, 100, width - width/4, height/2);
+      mBoss = new MiniBoss(800, 100, width - 3 * width/4, height/2- 100);
       h.display();
       m.display();
       w.display();
@@ -75,7 +75,7 @@ class Battle {
       heroes[2] = m;
     }
     if (mode == 1) {
-      fBoss = new FinalBoss(1000, 150, width - width/4, height/2);
+      fBoss = new FinalBoss(1000, 150, width - 3 * width/4, height/2-150);
       h.display();
       m.display();
       w.display();
@@ -416,12 +416,12 @@ class Battle {
       }
     }
     if (mBoss != null) {
-      if (mouseX > mBoss.x && mouseX < mBoss.x + 100 && mouseY > mBoss.y && mouseY < mBoss.y + 100 && mousePressed) {
+      if (mouseX > mBoss.x && mouseX < mBoss.x + 150 && mouseY > mBoss.y && mouseY < mBoss.y + 150 && mousePressed) {
         return mBoss;
       }
     }
     if (fBoss != null) {
-      if (mouseX > fBoss.x - 25 && mouseX < fBoss.x + 25 && mouseY > fBoss.y - 25 && mouseY < fBoss.y + 25 && mousePressed) {
+      if (mouseX > fBoss.x - 25 && mouseX < fBoss.x + 200 && mouseY > fBoss.y -25 && mouseY < fBoss.y + 200 && mousePressed) {
         return fBoss;
       }
     }

@@ -6,7 +6,7 @@ class MiniBoss extends Monsters {
     x = x_;
     y = y_;
     a = loadImage("Scarmiglione2.png");
-    a.resize(100, 100);
+    a.resize(150, 150);
   }
 
   void attack(Classes character) {//in battle, make it so that theres a half chance that it does hitAll and half chance it hits a random mob

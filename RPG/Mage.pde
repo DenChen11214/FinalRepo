@@ -1,5 +1,6 @@
 
 class Mage extends Classes {
+  PImage Palom;
   Mage() {
     atk = 100;
     hp = 400;
@@ -8,8 +9,10 @@ class Mage extends Classes {
     isDead = false;
     myTurn = false;
     name = "Palom";
-    x = width / 4.0;
+    x = width - width / 4.0;
     y = height / 2.0 - 5;
+    Palom = loadImage("Palom.png");
+    Palom.resize(75,75);
   }
   void attack(Monsters monster) {
     //should trigger the attack animation
@@ -37,8 +40,7 @@ class Mage extends Classes {
 
   void display() {
     //testing
-    fill(255);
-    ellipse(x, y, 50, 50);
+    image(Palom,x,y);
     fill(0);
     text("" + hp, x, y);
   }

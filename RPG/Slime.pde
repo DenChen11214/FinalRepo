@@ -5,7 +5,7 @@ class Slime extends Monsters {
     atk = attack;
     x = x_;
     y = y_;
-    a= loadImage("WhiteMousse2.png");
+    a= loadImage("WhiteMousse.png");
     a.resize(75, 75);
   }
 

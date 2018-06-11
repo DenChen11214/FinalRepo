@@ -6,7 +6,7 @@ class FinalBoss extends Monsters{
     x = x_;
     y = y_;
      a = loadImage("Zemus.png");
-    a.resize(150,150);
+    a.resize(200,200);
   }
 
   void attack(Classes character) {// do the same thing you did in Miniboss here

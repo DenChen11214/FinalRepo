@@ -17,7 +17,7 @@ class Map {
     int col = lines[0].length();
     int  i = 0;
     String[] l = loadStrings("BossRoom.txt");
-    u = loadImage("kain_sprite.png");
+    u = loadImage("Kain.png");;
     u.resize(30, 30);
     walls = loadImage("stone4_b.jpg");
     walls.resize(30, 30);
@@ -25,9 +25,9 @@ class Map {
     floor.resize(30, 30);
     stairs = loadImage("stairs.jpg");
     stairs.resize(30, 30);
-    boss = loadImage("boss.jpg");
+    boss = loadImage("Scarmiglione2.png");
     boss.resize(30, 30);
-    drag = loadImage("bahamut.jpg");
+    drag = loadImage("Zemus.png");
     drag.resize(120, 120);
     base = new char[row][col];
     last = new char[row][col];

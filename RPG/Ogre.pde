@@ -6,8 +6,8 @@ class Ogre extends Monsters {
     atk = attack;
     x = x_;
     y = y_;
-    a = loadImage(Ogre.png");
-    a.resize(75, 75);
+    a = loadImage("Ogre.png");
+    a.resize(100, 100);
   }
 
   void attack(Classes character) {
