@@ -5,6 +5,8 @@ class Goblin extends Monsters {
     atk = attack;
     x = x_;
     y = y_;
+    a = loadImage("Goblin.png");
+    a.resize(75,75);
   }
   void attack(Classes character) {
     character.hp -=atk;
@@ -20,7 +22,7 @@ class Goblin extends Monsters {
   }
   void display() {
     //testing
-
+    image(a,x,y);
     fill(0);
     text("" + hp, x, y);
   }
