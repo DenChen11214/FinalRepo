@@ -8,6 +8,7 @@ float stepsTaken;
 boolean hasStepped;
 boolean start;
 boolean gameOver;
+boolean howToPlay;
 Healer h;
 Mage m;
 Warrior w;
@@ -23,16 +24,20 @@ void setup() {
   System.out.println(xOld);
   start = false;
   gameOver = false;
+  howToPlay = false;
   background(0);
   textSize(32);
   textAlign(CENTER);
   rectMode(CENTER);
+  fill(255);
   text("BUDGETED BOOTLEGGED FINAL FANTASY", width / 2, height/4);
   fill(255);
   rect(width / 2, height / 2 - 10, 200, 100);
+  rect(width / 2, 3 * height / 4 - 10, 200 ,100);
   fill(0);
   textSize(32);
   text("Start", width/2, height /2);
+  text("How to Play", width / 2, 3 * height / 4);
   textAlign(CORNER);
   rectMode(CORNER);
   System.out.println(cave.lx);
@@ -52,6 +57,16 @@ void draw() {
     text("Try Again?", width/2, 2 *height / 3);
     fill(255);
   } else {
+    if (howToPlay){
+      textAlign(CENTER);
+      background(0);
+      fill(255);
+      text("Goal: Make it through the maze \n and fight the miniboss and finalboss \n in order to escape \n \n How to Play \n WASD keys to move \n Attack and Cleave need you \n to target a monster \n Fireball hits all enemies \n Heal needs you to target a party member \n Run Away has a 1/3 chance of working",width / 2, 40);
+      rectMode(CENTER);
+      rect(width/ 2, height - 50, 200, 100);
+      fill(0);
+      text("Go Back", width / 2, height  - 40);
+  }
     if (start) {
       if (!inBattle) {
         cave.display();    
@@ -115,6 +130,14 @@ void keyPressed() {
 void mouseClicked() {
   if (mouseX > width / 2 - 100 && mouseX < width / 2 + 100 && mouseY > height / 4 - 60 && mouseY < height / 2 + 40 && !start) {
     start = true;
+  }
+  if (mouseX > width / 2 - 100 && mouseX < width / 2 + 100 && mouseY > 3 * height / 4 - 60 && mouseY < 3 * height / 4 + 40) {
+    howToPlay = true;
+  }
+  if(mouseX > width / 2 - 100 && mouseX < width / 2 + 100 && mouseY > height - 100 && mouseY < height && howToPlay){
+    howToPlay = false;
+    setup();
+    
   }
   if (gameOver && mouseX > width / 2 - 100 && mouseX < width / 2 + 100 && mouseY > 2 * height / 3 - 60 && mouseY < 2 * height / 3 + 40) {
     setup();
