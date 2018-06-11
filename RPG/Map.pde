@@ -10,6 +10,9 @@ class Map {
   PImage walls, floor, stairs, u, boss, drag;
   boolean end;
   Map() {
+    lx = 10;
+    ly = 2;
+    end = true;
     String[] lines = loadStrings("Room.txt");  
     int row = lines.length;
     int col = lines[0].length();
@@ -41,10 +44,6 @@ class Map {
           bx = r;
           by = c;
         }
-        if (last[r][c] == 'O') {
-          lx = r;
-          lx = c;
-        }
         i++;
       }
       i = 0;
@@ -53,10 +52,11 @@ class Map {
 
   String toString() {
     String res = "";
-    for (int i = 0; i< base.length; i++) {
-      for (int j = 0; j< base[1].length; j++) {
-        res += base[i][j] + " ";
+    for (int i = 0; i< last.length; i++) {
+      for (int j = 0; j< last[1].length; j++) {
+        res += last[i][j] + " ";
       }
+      res += " \n";
     }
     return res;
   }
@@ -82,17 +82,18 @@ class Map {
       if (base[px][py] == 'E') {
         end = true;
       }
-    } else {
+    }
+    if(end){
       for (int i = 0; i<last.length; i++) {
         for (int j = 0; j< last[1].length; j++) {
           if (last[i][j] == '#') {
             image(walls, 30*i, 30*j);
           } else {
             image(floor, 30*i, 30*j);
+            image(drag, 30*lx, 30*ly);
           }
         }
       }
-      image(drag, 30*lx, 30*ly);
     }
     image(u, 30*px, 30*py);
   }

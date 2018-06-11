@@ -1,4 +1,5 @@
 import java.util.*; //<>// //<>// //<>// //<>//
+import gifAnimation.*;
 Map cave;
 Battle scene;
 float numBattles;
@@ -35,6 +36,7 @@ void setup() {
   text("Start", width/2, height /2);
   textAlign(CORNER);
   rectMode(CORNER);
+  System.out.println(cave.lx);
 }
 
 void draw() {
