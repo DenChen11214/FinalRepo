@@ -17,7 +17,8 @@ class Map {
     int col = lines[0].length();
     int  i = 0;
     String[] l = loadStrings("BossRoom.txt");
-    u = loadImage("Kain.png");;
+    u = loadImage("Kain.png");
+    ;
     u.resize(30, 30);
     walls = loadImage("stone4_b.jpg");
     walls.resize(30, 30);
@@ -82,16 +83,18 @@ class Map {
         end = true;
       }
     }
-    if(end){
+    if (end) {
       for (int i = 0; i<last.length; i++) {
         for (int j = 0; j< last[1].length; j++) {
           if (last[i][j] == '#') {
             image(walls, 30*i, 30*j);
           } else {
             image(floor, 30*i, 30*j);
-            image(drag, 30*lx, 30*ly);
           }
         }
+      }
+      if (lx >0 && ly> 0) {
+        image(drag, 30*lx, 30*ly);
       }
     }
     image(u, 30*px, 30*py);

@@ -24,12 +24,12 @@ class Battle {
     heroes[1] = h;
     heroes[2] = m;
     if (numMonsters ==1 ) {
-      g = new Goblin(350, 70, width - 3 * width/4, height/2);
+      g = new Goblin(350, 30, width - 3 * width/4, height/2);
     } else if (numMonsters ==2 ) {
       s = new Slime(400, 50, width - 3 * width/4, height/ 3 + 50);
       o = new Ogre(500, 40, width - 3 * width/4, 2 * height/3);
     } else {
-      g = new Goblin(350, 70, width - 3 * width/4, height/4 + 50);
+      g = new Goblin(350, 30, width - 3 * width/4, height/4 + 50);
       s = new Slime(400, 50, width - 3 * width/4, height/2 - 5);
       o = new Ogre(500, 40, width - 3 * width/4, height/2 + 115);
     }
@@ -52,7 +52,7 @@ class Battle {
     heroes[1] = h;
     heroes[2] = m;
     numMonsters = 1;
-    g = new Goblin(350, 70, width - 3* width/4, height/2);
+    g = new Goblin(350, 30, width - 3* width/4, height/2);
     w.setTurn(true);
     h.setTurn(false);
     m.setTurn(false);
@@ -75,7 +75,7 @@ class Battle {
       heroes[2] = m;
     }
     if (mode == 1) {
-      fBoss = new FinalBoss(1000, 150, width - 3 * width/4, height/2-150);
+      fBoss = new FinalBoss(100, 140, width - 3 * width/4, height/2-150);
       h.display();
       m.display();
       w.display();
@@ -107,6 +107,8 @@ class Battle {
       if (fBoss != null) {
         if (fBoss.hp <= 0) {
           inBattle = false;
+          cave.lx = -1;
+          cave.ly = -1;
         } else {
           fBoss.display();
         }

@@ -30,7 +30,7 @@ class Healer extends Classes {
     else{
       character.hp += 150;
     }
-    cooldown = 3;
+    cooldown = 2;
   }
 
   void dead() {

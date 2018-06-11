@@ -9,6 +9,7 @@ boolean hasStepped;
 boolean start;
 boolean gameOver;
 boolean howToPlay;
+boolean won;
 Healer h;
 Mage m;
 Warrior w;
@@ -20,6 +21,7 @@ void setup() {
   w = new Warrior();
   xOld = cave.px;
   yOld = cave.py;
+  won = false;
   System.out.println(yOld);
   System.out.println(xOld);
   start = false;
@@ -43,6 +45,15 @@ void setup() {
 }
 
 void draw() {
+  if (cave.lx < 0 && cave.ly < 0){
+    start = false;
+    background(0);
+    fill(255);
+    textSize(32);
+    textAlign(CENTER);
+    rectMode(CENTER);
+    text("Game Cleared!!", width / 2, height / 3);
+  }
   if (gameOver) {
     delay(3000);
     background(0);
@@ -71,8 +82,13 @@ void draw() {
         cave.display();    
         xNew = cave.px;
         yNew = cave.py;
-        if (xNew == cave.bx && yNew == cave.by) {
+        if (xNew == cave.bx && yNew == cave.by && !cave.end) {
           scene = new Battle(0);
+          inBattle = true;
+          hasStepped = false;
+        }
+        if(xNew - cave.lx<=  4 && yNew - cave.ly <= 4 && cave.end){
+          scene = new Battle(1);
           inBattle = true;
           hasStepped = false;
         }
